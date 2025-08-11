@@ -2,15 +2,13 @@ import { Link } from "react-router-dom";
 import { useCartStore } from "../stores/useCartStore";
 import { motion } from "framer-motion";
 import { ShoppingCart } from "lucide-react";
-//import CartItem from "../components/CartItem";
-//import PeopleAlsoBought from "../components/PeopleAlsoBought";
-//import OrderSummary from "../components/OrderSummary";
-//import GiftCouponCard from "../components/GiftCouponCard";
+import CartItem from "../components/CartItem";
+import PeopleAlsoBought from "../components/PeopleAlsoBought";
+import OrderSummary from "../components/OrderSummary";
+import GiftCouponCard from "../components/GiftCouponCard";
 
 const CartPage = () => {
 	const { cart } = useCartStore();
-
-	console.log("Cart: ", cart)
 
 	return (
 		<div className='py-8 md:py-16'>
