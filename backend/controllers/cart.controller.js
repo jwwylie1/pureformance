@@ -11,7 +11,7 @@ export const addToCart = async (req, res) => {
       existingItem.quantity += 1;
     } else {
       // If item does not exist, add it to the cart
-      user.cartItems.push({ id: productId, quantity: 1 });
+      user.cartItems.push(productId);
     }
 
     await user.save(); // Save the updated cart to the database

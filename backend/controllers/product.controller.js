@@ -4,8 +4,8 @@ import Product from "../models/product.model.js";
 
 export const getAllProducts = async (req, res) => {
   try {
-    const products = await Product.find();
-    res.json(products);
+    const products = await Product.find({});
+    res.json({ products });
   } catch (error) {
     console.log("Get all products error:", error.message);
     res.status(500).json({ message: "Failed to retrieve products", error: error.message });
@@ -59,7 +59,7 @@ export const getProductsByCategory = async (req, res) => {
     const { category } = req.params;
 
     const products = await Product.find({ category }).lean();
-    res.json(products);
+    res.json({products});
 
   } catch (error) {
     console.log("Get products by category error:", error.message);
@@ -73,10 +73,10 @@ export const createProduct = async (req, res) => {
 
     let cloudinaryResponse = null;
     if (image) {
-      cloudinaryResponse = await cloudinary.v2.uploader.upload(image, {folder: "products"});
+      cloudinaryResponse = await cloudinary.uploader.upload(image, {folder: "products"});
     }
 
-    const newProduct = new Product({
+    const newProduct = await Product.create({
       name,
       description,
       price,
@@ -85,11 +85,6 @@ export const createProduct = async (req, res) => {
     });
 
     res.status(201).json(newProduct);
-
-    //await newProduct.save();
-
-    // clear cache after creating a new product
-    //await redis.del("featuredProducts");
 
   } catch (error) {
     console.log("Create product error:", error.message);
@@ -119,25 +114,25 @@ export const toggleFeaturedProduct = async (req, res) => {
 
 export const deleteProduct = async (req, res) => {
   try {
-    const { id } = req.params.id;
+    const product = await Product.findById(req.params.id);
 
-    const product = await Product.findByIdAndDelete(id);
+		if (!product) {
+			return res.status(404).json({ message: "Product not found" });
+		}
 
-    if (!product) {
-      return res.status(404).json({ message: "Product not found" });
-    }
+		if (product.image) {
+			const publicId = product.image.split("/").pop().split(".")[0];
+			try {
+				await cloudinary.uploader.destroy(`products/${publicId}`);
+				console.log("deleted image from cloduinary");
+			} catch (error) {
+				console.log("error deleting image from cloduinary", error);
+			}
+		}
 
-    // delete image from Cloudinary if it exists
-    if (product.image) {
-      const publicId = product.image.split("/").pop().split(".")[0]; // extract public ID from URL
-      await cloudinary.v2.uploader.destroy(`products/${publicId}`);
-      console.log("Image deleted from Cloudinary");
-    }
+		await Product.findByIdAndDelete(req.params.id);
 
-    // clear cache after deleting a product
-    //await redis.del("featuredProducts");
-
-    res.json({ message: "Product deleted successfully" });
+		res.json({ message: "Product deleted successfully" });
 
   } catch (error) {
     console.log("Delete product error:", error.message);
