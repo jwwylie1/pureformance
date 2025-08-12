@@ -1,6 +1,18 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 
+/*
+name						str
+email						str
+password				str
+cartItems				arr
+	> quantity		num
+	> product			Product
+	> color				str
+	> size				str
+role						str
+*/
+
 const userSchema = new mongoose.Schema(
 	{
 		name: {
@@ -28,6 +40,14 @@ const userSchema = new mongoose.Schema(
 				product: {
 					type: mongoose.Schema.Types.ObjectId,
 					ref: "Product",
+				},
+				color: {
+					type: String,
+					required: false,
+				},
+				size: {
+					type: String,
+					required: false,
 				},
 			},
 		],

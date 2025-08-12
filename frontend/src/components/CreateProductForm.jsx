@@ -12,6 +12,11 @@ const CreateProductForm = () => {
 		price: "",
 		category: "",
 		image: "",
+		weblink: "",
+		isFeatured: false, // this doesn't change
+		colorsStr: "",
+		hexesStr: "",
+		sizesStr: "",
 	});
 
 	const { createProduct, loading } = useProductStore();
@@ -20,7 +25,9 @@ const CreateProductForm = () => {
 		e.preventDefault();
 		try {
 			await createProduct(newProduct);
-			setNewProduct({ name: "", description: "", price: "", category: "", image: "" });
+			setNewProduct({ name: "", description: "", price: "", category: "", image: "", weblink: "", isFeatured: false, 
+				colorsStr: "", hexesStr: "", sizesStr: "",
+			});
 		} catch {
 			console.log("error creating a product");
 		}
@@ -58,7 +65,26 @@ const CreateProductForm = () => {
 						id='name'
 						name='name'
 						value={newProduct.name}
+						placeholder='Cool New Product'
 						onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
+						className='mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2
+						 px-3 text-white focus:outline-none focus:ring-2
+						focus:ring-emerald-500 focus:border-emerald-500'
+						required
+					/>
+				</div>
+
+				<div>
+					<label htmlFor='weblink' className='block text-sm font-medium text-gray-300'>
+						Web Link (pure.com/item/HERE)
+					</label>
+					<input
+						type='text'
+						id='weblink'
+						name='weblink'
+						value={newProduct.weblink}
+						placeholder='cool-new-product'
+						onChange={(e) => setNewProduct({ ...newProduct, weblink: e.target.value })}
 						className='mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2
 						 px-3 text-white focus:outline-none focus:ring-2
 						focus:ring-emerald-500 focus:border-emerald-500'
@@ -92,6 +118,7 @@ const CreateProductForm = () => {
 						id='price'
 						name='price'
 						value={newProduct.price}
+						placeholder='49.99'
 						onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })}
 						step='0.01'
 						className='mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm 
@@ -134,6 +161,58 @@ const CreateProductForm = () => {
 						Upload Image
 					</label>
 					{newProduct.image && <span className='ml-3 text-sm text-gray-400'>Image uploaded </span>}
+				</div>
+
+				<div className="flex gap-4">
+					<div className="flex-1">
+						<label htmlFor="colors" className="block text-sm font-medium text-gray-300 mb-1">
+							Colors (Actual name, one per line)
+						</label>
+						<textarea
+							id="colors"
+							name="colors"
+							rows={5}
+							value={newProduct.colors}
+							placeholder={`Red\nBlue\nCharcoal\nBlack`}
+							onChange={(e) => setNewProduct({ ...newProduct, colorsStr: e.target.value })}
+							className="block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+							required
+						/>
+					</div>
+
+					<div className="flex-1">
+						<label htmlFor="hexes" className="block text-sm font-medium text-gray-300 mb-1">
+							Colors (Hex code, one per line)
+						</label>
+						<textarea
+							id="hexes"
+							name="hexes"
+							rows={5}
+							value={newProduct.hexes}
+							placeholder={`#ff0000\n#0000ff\n#4a4a4a\n#000000`}
+							onChange={(e) => setNewProduct({ ...newProduct, hexesStr: e.target.value })}
+							className="block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+							required
+						/>
+					</div>
+				</div>
+
+				<div>
+					<label htmlFor='name' className='block text-sm font-medium text-gray-300'>
+						Available Sizes (Abbreviation)
+					</label>
+					<input
+						type='text'
+						id='sizes'
+						name='sizes'
+						value={newProduct.sizes}
+						placeholder='S, M, L, XL, XXL'
+						onChange={(e) => setNewProduct({ ...newProduct, sizesStr: e.target.value })}
+						className='mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2
+						 px-3 text-white focus:outline-none focus:ring-2
+						focus:ring-emerald-500 focus:border-emerald-500'
+						required
+					/>
 				</div>
 
 				<button

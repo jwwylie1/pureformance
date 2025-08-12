@@ -1,5 +1,13 @@
 import mongoose from "mongoose";
 
+/*
+code									str
+discountPercentage		num
+expirationDate				date
+isActive							bool
+userId								User
+*/
+
 const couponSchema = new mongoose.Schema(
 	{
 		code: {

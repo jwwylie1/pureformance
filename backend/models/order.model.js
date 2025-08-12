@@ -1,5 +1,17 @@
 import mongoose from "mongoose";
 
+/*
+user							User
+products					arr
+	> product				Product
+	> quantity			num
+	> color					str
+	> size					str
+	> price					num
+totalAmount				num
+stripeSessionId		str
+*/
+
 const orderSchema = new mongoose.Schema(
 	{
 		user: {
@@ -18,6 +30,14 @@ const orderSchema = new mongoose.Schema(
 					type: Number,
 					required: true,
 					min: 1,
+				},
+				color: {
+					type: String,
+					required: false,
+				},
+				size: {
+					type: String,
+					required: false,
 				},
 				price: {
 					type: Number,

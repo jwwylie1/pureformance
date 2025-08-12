@@ -41,7 +41,7 @@ export const getFeaturedProducts = async (req, res) => {
 
 export const createProduct = async (req, res) => {
 	try {
-		const { name, description, price, image, category } = req.body;
+		const { name, description, price, image, category, weblink, isFeatured, colorsStr, hexesStr, sizesStr } = req.body;
 
 		let cloudinaryResponse = null;
 
@@ -49,12 +49,35 @@ export const createProduct = async (req, res) => {
 			cloudinaryResponse = await cloudinary.uploader.upload(image, { folder: "products" });
 		}
 
+		const colorsArr = colorsStr ? colorsStr.split("\n").map(s => s.trim()).filter(Boolean) : [];
+		const hexesArr = hexesStr ? hexesStr.split("\n").map(s => s.trim()).filter(Boolean) : [];
+		const colors = colorsArr.map((color, idx) => ({
+			name: colorsArr[idx],
+			hex: hexesArr[idx] || ""
+		}));
+
+		const sizes = sizesStr ? sizesStr.split(",").map(s => s.trim()).filter(Boolean) : [];
+
+		const variants = colors.map(color => ({
+			color: color.name,
+			hex: color.hex,
+			sizes: sizes.map(size => ({
+					size: size,
+					inStock: true
+			}))
+		}));
+
+		console.log("Link: " + weblink)
+
 		const product = await Product.create({
 			name,
 			description,
 			price,
 			image: cloudinaryResponse?.secure_url ? cloudinaryResponse.secure_url : "",
 			category,
+			weblink,
+			isFeatured,
+			variants,
 		});
 
 		res.status(201).json(product);
@@ -139,6 +162,16 @@ export const toggleFeaturedProduct = async (req, res) => {
 		}
 	} catch (error) {
 		console.log("Error in toggleFeaturedProduct controller", error.message);
+		res.status(500).json({ message: "Server error", error: error.message });
+	}
+};
+
+export const getProductByWeblink = async (req, res) => {
+	try {
+		const product = await Product.findOne({ weblink: req.params.weblink });
+		res.json({ product })
+	} catch (error) {
+		console.log("Error finding product by weblink", error.message);
 		res.status(500).json({ message: "Server error", error: error.message });
 	}
 };

@@ -79,4 +79,15 @@ export const useProductStore = create((set) => ({
 			console.log("Error fetching featured products:", error);
 		}
 	},
+
+	fetchProductByWeblink: async (weblink) => {
+		set({ loading: true });
+		try {
+			const response = await axios.get(`/products/weblink/${weblink}`);
+			set({ product: response.data.product, loading: false });
+		} catch (error) {
+			set({ error: "Failed to fetch product", loading: false });
+			console.log("Error fetching products:", error);
+		}
+	},
 }));
