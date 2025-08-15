@@ -31,10 +31,9 @@ const productSchema = new mongoose.Schema(
 			min: 0,
 			required: true,
 		},
-		image: {
-			type: String,
-			required: [true, "Image is required"],
-		},
+		images: [{
+			type: String
+		}],
 		category: {
 			type: String,
 			required: true,
@@ -49,23 +48,19 @@ const productSchema = new mongoose.Schema(
 		},
 		variants: [
       {
-        color: {
+        flavor: {
           type: String,
           required: true,
         },
-				hex: {
-					type: String,
-					required: true,
-				},
         sizes: [
 					{
 						size: {
 							type: String,
 							required: true,
 						},
-						inStock: {
-							type: Boolean,
-							default: true,
+						stock: {
+							type: Number,
+							default: 100,
 						}
         	}
 				]

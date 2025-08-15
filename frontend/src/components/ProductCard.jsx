@@ -1,5 +1,6 @@
 import toast from "react-hot-toast";
-import { ShoppingCart } from "lucide-react";
+import { useState } from "react";
+import { ShoppingCart, Plus } from "lucide-react";
 import { Link } from "react-router-dom"
 import { useUserStore } from "../stores/useUserStore";
 import { useCartStore } from "../stores/useCartStore";
@@ -7,6 +8,9 @@ import { useCartStore } from "../stores/useCartStore";
 const ProductCard = ({ product }) => {
 	const { user } = useUserStore();
 	const { addToCart } = useCartStore();
+
+	const [isHovered, setIsHovered] = useState(false);
+
 	const handleAddToCart = () => {
 		if (!user) {
 			toast.error("Please login to add products to cart", { id: "login" });
@@ -18,29 +22,31 @@ const ProductCard = ({ product }) => {
 	};
 
 	return (
-		<div className='flex w-full relative flex-col overflow-hidden rounded-lg border border-gray-700 shadow-lg'>
+		<div className='product-card' 
+			onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}>
 			<Link to={"/item/" + product.weblink}>
-				<div className='relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl'>
-					<img className='object-cover w-full' src={product.image} alt='product image' />
-					<div className='absolute inset-0 bg-black bg-opacity-20' />
+				<div className="product-img-ctr">
+					<img className='product-img' src={product.images[isHovered && product.images[1] ? 1 : 0]}  
+					alt={product.name + ' image'} />
 				</div>
 
-				<div className='mt-4 px-5 pb-5'>
-					<h5 className='text-xl font-semibold tracking-tight text-white'>{product.name}</h5>
-					<div className='mt-2 mb-5 flex items-center justify-between'>
-						<p>
-							<span className='text-3xl font-bold text-emerald-400'>${product.price}</span>
-						</p>
-					</div>
-					<button
-						className='flex items-center justify-center rounded-lg bg-emerald-600 px-5 py-2.5 text-center text-sm font-medium
-						text-white hover:bg-emerald-700 focus:outline-none focus:ring-4 focus:ring-emerald-300'
-						onClick={handleAddToCart}
-					>
-						<ShoppingCart size={22} className='mr-2' />
-						Add to cart
-					</button>
-				</div>
+				<div className='product-info'>
+            <div className='product-details'>
+                <h5 className='product-name'>{product.name}</h5>
+                <p className='product-price'>${product.price}</p>
+            </div>
+            
+            <Plus 
+                size={24} 
+                className='plus-icon'
+                onClick={(e) => {
+                    e.preventDefault(); // Prevents the link navigation
+                    e.stopPropagation(); // Stops the event from bubbling up
+                    handleAddToCart(); // Your add to cart function
+                }}
+            />
+        </div>
 			</Link>
 		</div>
 	);

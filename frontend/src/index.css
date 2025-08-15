@@ -1,3 +1,182 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: 'Hedvig';
+    src: url('/fonts/HedvigLettersSans-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+  background-color: white;
+  font-family: Hedvig;
+  margin: 0;
+}
+
+.w-100 {width: 100%}
+
+.navbar-margin {margin-top: 100px}
+
+header {
+  top: 0;
+  background-color: white;
+  height: 100px;
+  box-sizing: border-box;
+  color: #222;
+  z-index: 200;
+}
+
+.aaa {margin-top: 200px;}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-weight: 800;
+  width: 90%;
+  right: 0;
+}
+
+.logo-link {
+  margin: 0 1%;
+  height: 100px;
+  width: 10%;
+  display: flex;
+}
+
+.header-logo {
+  filter: brightness(0);
+  width: 90%;
+  margin: auto;
+}
+
+.navbtn {
+  height: 100px;
+  line-height: 100px;
+  padding: 0 5%;
+  font-family: 'Hedvig';
+}
+
+.navbtn:hover {color: black;}
+
+.symbol-ctr {
+  display: flex;
+  align-items: center;
+  height: 100px;
+  flex-direction: row;
+  justify-content: space-evenly; 
+  margin-right: 20px;
+}
+
+.symbol-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 0 20px;
+}
+.cart-number {
+ position: absolute;
+ top: -8px;
+ left: -8px;
+ background-color: black;
+ color: white;
+ border-radius: 50%;
+ width: 18px;
+ height: 18px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ font-size: 12px;
+ font-weight: bold;
+ line-height: 1;
+}
+
+.big-picture-ctr {
+  height: 25vw;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  line-height: 25vw;
+  color: white;
+  font-weight: 800;
+}
+
+.surf-picture {
+  background-image: url('/imgs/PLACEHOLDERsurf.webp');
+  font-size: 3vw;
+  padding-left: 7%;
+}
+
+.products-ctr {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 2fr));
+  gap: 2rem;
+  padding: 0 2rem;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border: 1px solid #444;
+  width: 100%;
+  margin: 2vw;
+}
+
+.product-img-ctr {
+ width: 100%;
+ height: 400px;
+ overflow: hidden;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+}
+
+.product-img {
+ width: 100%;
+ height: auto;
+ object-fit: cover;
+ object-position: center;
+}
+
+.product-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.product-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.product-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.product-price {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.plus-icon {
+  margin-right: 10px;
+  background-color: #6acfdf;
+  padding: 5px;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  box-sizing: content-box;
+  flex-shrink: 0;
+  transition: color 0.3s ease;
+}
+
+.plus-icon:hover {background-color: #88dae7; color: black}
