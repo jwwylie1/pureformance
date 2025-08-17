@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
+import LogoutHandler from "./pages/LogoutHandler"
 import AdminPage from "./pages/AdminPage";
 import CategoryPage from "./pages/CategoryPage";
 import ItemPage from "./pages/ItemPage";
@@ -20,17 +21,24 @@ import PurchaseCancelPage from "./pages/PurchaseCancelPage";
 
 function App() {
 	const { user, checkAuth, checkingAuth } = useUserStore();
+	const { initializeCart } = useCartStore(); // Add this
 	const { getCartItems } = useCartStore();
+
 	useEffect(() => {
-		checkAuth();
+			checkAuth();
 	}, [checkAuth]);
 
 	useEffect(() => {
-		if (!user) return;
+			// Initialize cart whenever user state changes
+			initializeCart(user);
+	}, [initializeCart, user]); // This replaces your old getCartItems logic
 
+<<<<<<< Updated upstream
 		getCartItems();
 	}, [getCartItems, user]);
 
+=======
+>>>>>>> Stashed changes
 	if (checkingAuth) return <LoadingSpinner />;
 
 	return (
@@ -42,11 +50,12 @@ function App() {
 						<Route path='/' element={<HomePage />} />
 						<Route path='/signup' element={!user ? <SignUpPage /> : <Navigate to='/' />} />
 						<Route path='/login' element={!user ? <LoginPage /> : <Navigate to='/' />} />
-						<Route
+						<Route path='/logout' element={<LogoutHandler />} />
+						<Route 
 							path='/secret-dashboard'
 							element={user?.role === "admin" ? <AdminPage /> : <Navigate to='/login' />}
 						/>
-						<Route path='/cart' element={user ? <CartPage /> : <Navigate to='/login' />} />
+						<Route path='/cart' element={<CartPage />} />
 						<Route
 							path='/purchase-success'
 							element={user ? <PurchaseSuccessPage /> : <Navigate to='/login' />}

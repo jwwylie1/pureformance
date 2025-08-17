@@ -12,12 +12,20 @@
 body {
   background-color: white;
   font-family: Hedvig;
-  margin: 0;
+  margin: 0 0 30px 0;
 }
 
 .w-100 {width: 100%}
 
 .navbar-margin {margin-top: 100px}
+
+.divider-ctr {
+  position: relative; 
+  margin: 20px 0;
+  overflow: hidden;
+  height: 3px;
+  width: 90%;
+}
 
 header {
   top: 0;
@@ -180,3 +188,67 @@ nav {
 }
 
 .plus-icon:hover {background-color: #88dae7; color: black}
+
+.fw-900 {color: #ccf8ff}
+
+.values-ctr {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  box-sizing: border-box;
+  flex: 1;
+  flex-direction: row;
+  padding: 0 10%;
+  align-items: stretch;
+}
+
+.benefits-ctr {
+  width: 100%;
+  margin: 50px 0;
+}
+
+.benefits-icon {
+  width: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4b5563;
+}
+
+.benefits-icon-inactive:hover {
+  color: #393c40
+}
+
+.benefits-icon-active {
+  color: black;
+}
+
+.benefits-ctr h1 {
+  margin: 0 0 24px 0;
+  text-align: center;
+  font-size: 40px;
+  font-weight: 900;
+}
+
+.benefits-ctr h2 { /*title*/
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.benefits-ctr h4 { /*subtitle*/
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.values-img-ctr {
+  width: 90%;
+  margin-left: 10%;
+  overflow: hidden;
+}
+
+.values-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}

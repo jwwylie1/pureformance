@@ -2,6 +2,7 @@ import Product from "../models/product.model.js";
 
 export const getCartProducts = async (req, res) => {
 	try {
+		console.log(req)
 		const products = await Product.find({ _id: { $in: req.user.cartItems } });
 
 		// add quantity for each product
@@ -20,17 +21,24 @@ export const getCartProducts = async (req, res) => {
 export const addToCart = async (req, res) => {
 	try {
 		const { productId } = req.body;
-		const user = req.user;
 
-		const existingItem = user.cartItems.find((item) => item.id === productId);
-		if (existingItem) {
-			existingItem.quantity += 1;
+		if (req.user) { // see if user is logged in
+			// Logged-in user - save to database
+			const user = req.user;
+			const existingItem = user.cartItems.find((item) => item.id === productId);
+
+			if (existingItem) {
+				existingItem.quantity += 1;
+			} else {
+				user.cartItems.push(productId);
+			}
+
+			await user.save();
+			res.json(user.cartItems);
 		} else {
-			user.cartItems.push(productId);
+			// Guest user - return success (frontend handles storage)
+			res.json({ success: true, message: "Added to cart" });
 		}
-
-		await user.save();
-		res.json(user.cartItems);
 	} catch (error) {
 		console.log("Error in addToCart controller", error.message);
 		res.status(500).json({ message: "Server error", error: error.message });

@@ -1,7 +1,10 @@
 import { useEffect } from "react";
 import CategoryItem from "../components/CategoryItem";
 import { useProductStore } from "../stores/useProductStore";
+import { motion } from "framer-motion";
 import FeaturedProducts from "../components/FeaturedProducts";
+import BenefitsSection from "../components/BenefitsSection";
+import AnimatedDivider from "../components/AnimatedDivider";
 
 const categories = [
 	{ href: "/jeans", name: "Jeans", imageUrl: "/jeans.jpg" },
@@ -21,7 +24,23 @@ const HomePage = () => {
 	}, [fetchFeaturedProducts]);
 
 	return (
-		<></>
+		<>
+			<div className='big-picture-ctr w-100 surf-picture'>
+        UNLOCK YOUR <b className="fw-900">PURE</b>FORMANCE
+      </div>
+
+			<AnimatedDivider />
+
+			<motion.div className='values-ctr w-100 min-h-0'
+				initial={{ opacity: 0, y: 20 }}
+				animate={{ opacity: 1, y: 0 }}
+				transition={{ duration: 0.8, delay: 0.2 }}>
+				<BenefitsSection/>
+				<div className='values-img-ctr'>
+					<img className="values-img" src="/imgs/3-cans-ice-close-h.jpg" />
+				</div>
+			</motion.div>
+		</>
 	);
 };
 export default HomePage;

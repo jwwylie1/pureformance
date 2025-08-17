@@ -8,8 +8,7 @@ password				str
 cartItems				arr
 	> quantity		num
 	> product			Product
-	> color				str
-	> size				str
+	> flavor			str
 role						str
 */
 
@@ -41,11 +40,7 @@ const userSchema = new mongoose.Schema(
 					type: mongoose.Schema.Types.ObjectId,
 					ref: "Product",
 				},
-				color: {
-					type: String,
-					required: false,
-				},
-				size: {
+				flavor: {
 					type: String,
 					required: false,
 				},
