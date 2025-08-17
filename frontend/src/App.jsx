@@ -31,7 +31,7 @@ function App() {
 		getCartItems();
 	}, [getCartItems, user]);
 
-	if (!checkingAuth) return <LoadingSpinner />;
+	if (checkingAuth) return <LoadingSpinner />;
 
 	return (
 		<>
