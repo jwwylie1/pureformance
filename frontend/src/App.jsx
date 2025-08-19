@@ -8,6 +8,7 @@ import AdminPage from "./pages/AdminPage";
 import CategoryPage from "./pages/CategoryPage";
 import ItemPage from "./pages/ItemPage";
 import Products from "./pages/ProductsPage";
+import IngredientsPage from "./pages/IngredientsPage";
 
 import Navbar from "./components/Navbar";
 import { Toaster } from "react-hot-toast";
@@ -33,12 +34,6 @@ function App() {
 			initializeCart(user);
 	}, [initializeCart, user]); // This replaces your old getCartItems logic
 
-<<<<<<< Updated upstream
-		getCartItems();
-	}, [getCartItems, user]);
-
-=======
->>>>>>> Stashed changes
 	if (checkingAuth) return <LoadingSpinner />;
 
 	return (
@@ -48,7 +43,9 @@ function App() {
 				<div className='navbar-margin'>
 					<Routes>
 						<Route path='/' element={<HomePage />} />
+						<Route path='/ingredients' element={<IngredientsPage />} />
 						<Route path='/signup' element={!user ? <SignUpPage /> : <Navigate to='/' />} />
+						<Route path='/account' element={user ? <HomePage /> : <Navigate to='/login' />} />
 						<Route path='/login' element={!user ? <LoginPage /> : <Navigate to='/' />} />
 						<Route path='/logout' element={<LogoutHandler />} />
 						<Route 
@@ -58,7 +55,7 @@ function App() {
 						<Route path='/cart' element={<CartPage />} />
 						<Route
 							path='/purchase-success'
-							element={user ? <PurchaseSuccessPage /> : <Navigate to='/login' />}
+							element={<PurchaseSuccessPage />}
 						/>
 						<Route path='/purchase-cancel' element={user ? <PurchaseCancelPage /> : <Navigate to='/login' />} />
 

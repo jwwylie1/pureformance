@@ -1,10 +1,14 @@
 import Coupon from "../models/coupon.model.js";
 import Order from "../models/order.model.js";
+import Product from "../models/product.model.js";
 import { stripe } from "../lib/stripe.js";
 
 export const createCheckoutSession = async (req, res) => {
 	try {
 		const { products, couponCode } = req.body;
+
+		console.log("p1: ", products)
+
 
 		if (!Array.isArray(products) || products.length === 0) {
 			return res.status(400).json({ error: "Invalid or empty products array" });
@@ -45,10 +49,10 @@ export const createCheckoutSession = async (req, res) => {
 			cancel_url: `${process.env.CLIENT_URL}/purchase-cancel`,
 			discounts: coupon
 				? [
-						{
-							coupon: await createStripeCoupon(coupon.discountPercentage),
-						},
-				  ]
+					{
+						coupon: await createStripeCoupon(coupon.discountPercentage),
+					},
+				]
 				: [],
 			metadata: {
 				userId: req.user._id.toString(),
@@ -63,6 +67,8 @@ export const createCheckoutSession = async (req, res) => {
 			},
 		});
 
+		console.log("p2: ", session.metadata.products)
+
 		if (totalAmount >= 20000) {
 			await createNewCoupon(req.user._id);
 		}
@@ -70,6 +76,96 @@ export const createCheckoutSession = async (req, res) => {
 	} catch (error) {
 		console.error("Error processing checkout:", error);
 		res.status(500).json({ message: "Error processing checkout", error: error.message });
+	}
+};
+
+export const createGuestCheckoutSession = async (req, res) => {
+	try {
+		const { cartItems, couponCode, guestEmail } = req.body;
+
+		// Validate cart items and get current prices from database
+		const productIds = cartItems.map(item => item._id);
+		const products = await Product.find({ _id: { $in: productIds } });
+
+		if (products.length !== productIds.length) {
+			return res.status(400).json({ message: "Some products not found" });
+		}
+
+		// Build line items from guest cart
+		const lineItems = cartItems.map(cartItem => {
+			const product = products.find(p => p._id.toString() === cartItem._id);
+			if (!product) {
+				throw new Error(`Product ${cartItem._id} not found`);
+			}
+
+			return {
+				price_data: {
+					currency: 'usd',
+					product_data: {
+						name: product.name,
+						description: cartItem.flavor ? `Flavor: ${cartItem.flavor}` : '',
+					},
+					unit_amount: Math.round(product.price * 100),
+				},
+				quantity: cartItem.quantity,
+			};
+		});
+
+		// Handle coupon if provided
+		let discounts = [];
+		if (couponCode) {
+			const coupon = await Coupon.findOne({
+				code: couponCode,
+				isActive: true,
+				expirationDate: { $gt: new Date() }
+			});
+
+			if (coupon) {
+				// Create Stripe coupon or use existing
+				const stripeCoupon = await stripe.coupons.create({
+					percent_off: coupon.discountPercentage,
+					duration: 'once',
+				});
+				discounts = [{ coupon: stripeCoupon.id }];
+			}
+		}
+
+		const sessionConfig = {
+			payment_method_types: ['card'],
+			line_items: lineItems,
+			mode: 'payment',
+			success_url: `${process.env.CLIENT_URL}/purchase-success?session_id={CHECKOUT_SESSION_ID}`,
+			cancel_url: `${process.env.CLIENT_URL}/purchase-cancel`,
+			metadata: {
+				guestEmail: 'guest@email.com',
+				couponCode: couponCode || "",
+				products: JSON.stringify(
+					cartItems.map((p) => ({
+						id: p._id,
+						quantity: p.quantity,
+						price: p.price,
+					}))
+				),
+			}
+		};
+
+		if (discounts.length > 0) {
+			sessionConfig.discounts = discounts;
+		}
+
+		if (guestEmail) {
+			sessionConfig.customer_email = guestEmail;
+		}
+
+		const session = await stripe.checkout.sessions.create(sessionConfig);
+
+		res.json({ id: session.id, url: session.url });
+	} catch (error) {
+		console.error("Error creating guest checkout session:", error);
+		res.status(500).json({
+			message: "Server error",
+			error: error.message
+		});
 	}
 };
 
@@ -93,8 +189,10 @@ export const checkoutSuccess = async (req, res) => {
 
 			// create a new Order
 			const products = JSON.parse(session.metadata.products);
+			console.log("JSON products: ", products)
 			const newOrder = new Order({
 				user: session.metadata.userId,
+				guestEmail: session.metadata.guestEmail,
 				products: products.map((product) => ({
 					product: product.id,
 					quantity: product.quantity,

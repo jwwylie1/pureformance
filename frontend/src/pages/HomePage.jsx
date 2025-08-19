@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import FeaturedProducts from "../components/FeaturedProducts";
 import BenefitsSection from "../components/BenefitsSection";
 import AnimatedDivider from "../components/AnimatedDivider";
+import ValuesSection from "../components/ValuesSection";
 
 const categories = [
 	{ href: "/jeans", name: "Jeans", imageUrl: "/jeans.jpg" },
@@ -30,6 +31,11 @@ const HomePage = () => {
       </div>
 
 			<AnimatedDivider />
+
+			<ValuesSection />
+
+			<AnimatedDivider />
+
 
 			<motion.div className='values-ctr w-100 min-h-0'
 				initial={{ opacity: 0, y: 20 }}

@@ -49,25 +49,8 @@ export const createProduct = async (req, res) => {
 			cloudinaryResponse = await cloudinary.uploader.upload(image, { folder: "products" });
 		}
 
-		const colorsArr = colorsStr ? colorsStr.split("\n").map(s => s.trim()).filter(Boolean) : [];
-		const hexesArr = hexesStr ? hexesStr.split("\n").map(s => s.trim()).filter(Boolean) : [];
-		const colors = colorsArr.map((color, idx) => ({
-			name: colorsArr[idx],
-			hex: hexesArr[idx] || ""
-		}));
-
-		const sizes = sizesStr ? sizesStr.split(",").map(s => s.trim()).filter(Boolean) : [];
-
-		const variants = colors.map(color => ({
-			color: color.name,
-			hex: color.hex,
-			sizes: sizes.map(size => ({
-					size: size,
-					inStock: true
-			}))
-		}));
-
-		console.log("Link: " + weblink)
+		const flavor = "PLACEHOLDER";
+		const stock = 100;
 
 		const product = await Product.create({
 			name,
@@ -77,7 +60,8 @@ export const createProduct = async (req, res) => {
 			category,
 			weblink,
 			isFeatured,
-			variants,
+			flavor,
+			stock
 		});
 
 		res.status(201).json(product);

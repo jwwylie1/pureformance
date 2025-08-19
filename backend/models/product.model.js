@@ -8,12 +8,8 @@ image						str
 category				str
 weblink					str
 isFeatured			bool
-variants				arr
-	> colors			str
-	> hex					str
-	> sizes				arr
-		> size			str
-		> inStock 	bool
+flavor					str
+stock						num
 */
 
 const productSchema = new mongoose.Schema(
@@ -46,26 +42,14 @@ const productSchema = new mongoose.Schema(
 			type: Boolean,
 			default: false,
 		},
-		variants: [
-      {
-        flavor: {
-          type: String,
-          required: true,
-        },
-        sizes: [
-					{
-						size: {
-							type: String,
-							required: true,
-						},
-						stock: {
-							type: Number,
-							default: 100,
-						}
-        	}
-				]
-      },
-    ],
+		flavor: {
+			type: String,
+			required: true,
+		},
+		stock: {
+			type: Number,
+			default: 100,
+		}
 	},
 	{ timestamps: true }
 );

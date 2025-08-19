@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Brain, Eye, Zap } from 'lucide-react';
 
-export default function BenefitsSection() {
+const BenefitsSection = () => {
   const [activeIcon, setActiveIcon] = useState(0);
 
   const benefits = [
@@ -28,7 +28,7 @@ export default function BenefitsSection() {
   return (
     <div className="benefits-ctr">
       <h1>
-        OUR VALUES
+        PLACEHOLDER
       </h1>
       {/* Icons section */}
       <div className="flex justify-center items-center gap-8 mb-8">
@@ -64,3 +64,5 @@ export default function BenefitsSection() {
     </div>
   );
 }
+
+export default BenefitsSection

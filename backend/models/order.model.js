@@ -17,7 +17,11 @@ const orderSchema = new mongoose.Schema(
 		user: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "User",
-			required: true,
+			required: false,
+		},
+		guestEmail: {
+			type: String,
+			required: false,
 		},
 		products: [
 			{
@@ -30,14 +34,6 @@ const orderSchema = new mongoose.Schema(
 					type: Number,
 					required: true,
 					min: 1,
-				},
-				color: {
-					type: String,
-					required: false,
-				},
-				size: {
-					type: String,
-					required: false,
 				},
 				price: {
 					type: Number,

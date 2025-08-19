@@ -10,7 +10,7 @@ const stripePromise = loadStripe(
 );
 
 const OrderSummary = () => {
-	const { total, subtotal, coupon, isCouponApplied, cart } = useCartStore();
+	const { total, subtotal, coupon, isCouponApplied, cart, isGuest } = useCartStore();
 
 	const savings = subtotal - total;
 	const formattedSubtotal = subtotal.toFixed(2);
@@ -19,18 +19,37 @@ const OrderSummary = () => {
 
 	const handlePayment = async () => {
 		const stripe = await stripePromise;
-		const res = await axios.post("/payments/create-checkout-session", {
-			products: cart,
-			couponCode: coupon ? coupon.code : null,
-		});
 
-		const session = res.data;
-		const result = await stripe.redirectToCheckout({
-			sessionId: session.id,
-		});
+		try {
+			let res;
 
-		if (result.error) {
-			console.error("Error:", result.error);
+			if (isGuest) {
+				// For guests, send cart data in the request
+				res = await axios.post("/payments/create-guest-checkout-session", {
+					cartItems: cart, // Send the actual cart items
+					couponCode: coupon ? coupon.code : null,
+					// Optional: collect guest email here if you have it
+					// guestEmail: guestEmail
+				});
+			} else {
+				// Authenticated users - existing logic
+				res = await axios.post("/payments/create-checkout-session", {
+					products: cart,
+					couponCode: coupon ? coupon.code : null,
+				});
+			}
+
+			const session = res.data;
+			const result = await stripe.redirectToCheckout({
+				sessionId: session.id,
+			});
+
+			if (result.error) {
+				console.error("Error:", result.error);
+			}
+		} catch (error) {
+			console.error("Payment error:", error);
+			toast.error("Failed to start checkout");
 		}
 	};
 

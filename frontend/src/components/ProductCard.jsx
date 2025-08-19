@@ -28,6 +28,7 @@ const ProductCard = ({ product }) => {
 				<div className='product-info'>
             <div className='product-details'>
                 <h5 className='product-name'>{product.name}</h5>
+								<p className='flavor'>Yuzu Mint</p>
                 <p className='product-price'>${product.price}</p>
             </div>
             

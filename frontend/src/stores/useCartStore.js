@@ -255,12 +255,16 @@ export const useCartStore = create(
 				if (isGuest) {
 					// Handle as guest - local storage only
 					set((prevState) => {
-						const existingItem = prevState.cart.find((item) => item._id === product._id);
+						const existingItem = prevState.cart.find((item) =>
+							item._id === product._id && item.flavor === product.flavor
+						);
 						const newCart = existingItem
 							? prevState.cart.map((item) =>
-								item._id === product._id ? { ...item, quantity: item.quantity + 1 } : item
+								item._id === product._id && item.flavor === product.flavor
+									? { ...item, quantity: item.quantity + 1 }
+									: item
 							)
-							: [...prevState.cart, { ...product, quantity: 1 }];
+							: [...prevState.cart, { ...product, quantity: 1, flavor: product.flavor }];
 						return { cart: newCart };
 					});
 
@@ -269,16 +273,23 @@ export const useCartStore = create(
 				} else {
 					// Handle as logged-in user
 					try {
-						await axios.post("/cart", { productId: product._id });
+						await axios.post("/cart", {
+							productId: product._id,
+							flavor: product.flavor
+						});
 
 						// Update local state
 						set((prevState) => {
-							const existingItem = prevState.cart.find((item) => item._id === product._id);
+							const existingItem = prevState.cart.find((item) =>
+								item._id === product._id && item.flavor === product.flavor
+							);
 							const newCart = existingItem
 								? prevState.cart.map((item) =>
-									item._id === product._id ? { ...item, quantity: item.quantity + 1 } : item
+									item._id === product._id && item.flavor === product.flavor
+										? { ...item, quantity: item.quantity + 1 }
+										: item
 								)
-								: [...prevState.cart, { ...product, quantity: 1 }];
+								: [...prevState.cart, { ...product, quantity: 1, flavor: product.flavor }];
 							return { cart: newCart };
 						});
 
