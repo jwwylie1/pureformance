@@ -61,7 +61,7 @@ function App() {
 
 						<Route path='/products' element={<Products />} />
 
-						<Route path='/item/:item' element={<ItemPage />} />
+						<Route path='/item/:weblink' element={<ItemPage/>} />
 						<Route path='/:category' element={<CategoryPage />} />
 					</Routes>
 				</div>

@@ -20,16 +20,16 @@ const ProductCard = ({ product }) => {
 			onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}>
 			<Link to={"/item/" + product.weblink}>
-				<div className="product-img-ctr">
-					<img className='product-img' src={product.images[isHovered && product.images[1] ? 1 : 0]}  
+				<div className="product-card-img-ctr">
+					<img className='product-card-img' src={product.images[isHovered && product.images[1] ? 1 : 0]}  
 					alt={product.name + ' image'} />
 				</div>
 
-				<div className='product-info'>
-            <div className='product-details'>
-                <h5 className='product-name'>{product.name}</h5>
-								<p className='flavor'>Yuzu Mint</p>
-                <p className='product-price'>${product.price}</p>
+				<div className='product-card-info'>
+            <div className='product-card-details'>
+                <h5 className='product-card-name'>{product.name}</h5>
+								<p className='product-card-flavor'>Yuzu Mint</p>
+                <p className='product-card-price'>${product.price}</p>
             </div>
             
             <Plus 

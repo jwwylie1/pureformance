@@ -81,9 +81,12 @@ export const useProductStore = create((set) => ({
 	},
 
 	fetchProductByWeblink: async (weblink) => {
+		console.log("CALLED")
 		set({ loading: true });
 		try {
+			console.log('a')
 			const response = await axios.get(`/products/weblink/${weblink}`);
+			console.log('b')
 			set({ product: response.data.product, loading: false });
 		} catch (error) {
 			set({ error: "Failed to fetch product", loading: false });
