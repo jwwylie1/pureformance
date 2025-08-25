@@ -27,7 +27,7 @@ const HomePage = () => {
 	return (
 		<>
 			<div className='big-picture-ctr w-100 surf-picture'>
-        UNLOCK YOUR <b className="fw-900">PURE</b>FORMANCE
+        UNLOCK YOUR <b className="fw-900">PURE</b>FORMANCE TEST
       </div>
 
 			<AnimatedDivider />

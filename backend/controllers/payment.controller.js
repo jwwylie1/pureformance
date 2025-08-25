@@ -1,6 +1,7 @@
 import Coupon from "../models/coupon.model.js";
 import Order from "../models/order.model.js";
 import Product from "../models/product.model.js";
+import stockManager from "../utils/stockManager.js"
 import { stripe } from "../lib/stripe.js";
 
 export const createCheckoutSession = async (req, res) => {
@@ -169,50 +170,97 @@ export const createGuestCheckoutSession = async (req, res) => {
 	}
 };
 
+import mongoose from 'mongoose';
+import StockManager from '../utils/stockManager.js'; // Adjust path as needed
+
 export const checkoutSuccess = async (req, res) => {
+	const mongoSession = await mongoose.startSession();
+	
 	try {
-		const { sessionId } = req.body;
-		const session = await stripe.checkout.sessions.retrieve(sessionId);
+		await mongoSession.withTransaction(async () => {
+			const { sessionId } = req.body;
+			const session = await stripe.checkout.sessions.retrieve(sessionId);
 
-		if (session.payment_status === "paid") {
-			if (session.metadata.couponCode) {
-				await Coupon.findOneAndUpdate(
-					{
-						code: session.metadata.couponCode,
-						userId: session.metadata.userId,
-					},
-					{
-						isActive: false,
-					}
+			if (session.payment_status === "paid") {
+				// Handle coupon deactivation
+				if (session.metadata.couponCode) {
+					await Coupon.findOneAndUpdate(
+						{
+							code: session.metadata.couponCode,
+							userId: session.metadata.userId,
+						},
+						{
+							isActive: false,
+						},
+						{ session: mongoSession }
+					);
+				}
+
+				// Parse products and prepare for order creation
+				const products = JSON.parse(session.metadata.products);
+				console.log("JSON products: ", products);
+
+				// Create order data
+				const newOrder = new Order({
+					user: session.metadata.userId,
+					guestEmail: session.metadata.guestEmail,
+					products: products.map((product) => ({
+						product: product.id,
+						quantity: product.quantity,
+						price: product.price,
+					})),
+					totalAmount: session.amount_total / 100, // convert from cents to dollars,
+					stripeSessionId: sessionId,
+				});
+
+				// Save the order
+				const savedOrder = await newOrder.save({ session: mongoSession });
+
+				// Prepare purchases array for stock reduction
+				const purchases = products.map(product => ({
+					productId: product.id, // This should match your Product._id
+					quantity: product.quantity
+				}));
+
+				// Reduce stock using StockManager
+				await StockManager.reduceStock(purchases, mongoSession);
+
+				// Update order to mark stock as reduced
+				await Order.findByIdAndUpdate(
+					savedOrder._id,
+					{ stockReduced: true },
+					{ session: mongoSession }
 				);
+
+				res.status(200).json({
+					success: true,
+					message: "Payment successful, order created, stock updated, and coupon deactivated if used.",
+					orderId: savedOrder._id,
+				});
+			} else {
+				throw new Error("Payment not completed");
 			}
+		});
 
-			// create a new Order
-			const products = JSON.parse(session.metadata.products);
-			console.log("JSON products: ", products)
-			const newOrder = new Order({
-				user: session.metadata.userId,
-				guestEmail: session.metadata.guestEmail,
-				products: products.map((product) => ({
-					product: product.id,
-					quantity: product.quantity,
-					price: product.price,
-				})),
-				totalAmount: session.amount_total / 100, // convert from cents to dollars,
-				stripeSessionId: sessionId,
-			});
-
-			await newOrder.save();
-
-			res.status(200).json({
-				success: true,
-				message: "Payment successful, order created, and coupon deactivated if used.",
-				orderId: newOrder._id,
-			});
-		}
 	} catch (error) {
 		console.error("Error processing successful checkout:", error);
-		res.status(500).json({ message: "Error processing successful checkout", error: error.message });
+		
+		// Handle specific stock-related errors
+		if (error.message.includes('Insufficient stock')) {
+			return res.status(400).json({ 
+				success: false,
+				message: "Some items are out of stock. Please try again.", 
+				error: error.message 
+			});
+		}
+
+		res.status(500).json({ 
+			success: false,
+			message: "Error processing successful checkout", 
+			error: error.message 
+		});
+	} finally {
+		await mongoSession.endSession();
 	}
 };
 
