@@ -6,6 +6,7 @@ import FeaturedProducts from "../components/FeaturedProducts";
 import BenefitsSection from "../components/BenefitsSection";
 import AnimatedDivider from "../components/AnimatedDivider";
 import ValuesSection from "../components/ValuesSection";
+import AmbassadorSection from "../components/AmbassadorSection";
 
 const categories = [
 	{ href: "/jeans", name: "Jeans", imageUrl: "/jeans.jpg" },
@@ -46,6 +47,10 @@ const HomePage = () => {
 					<img className="values-img" src="/imgs/3-cans-ice-close-h.jpg" />
 				</div>
 			</motion.div>
+
+			<AnimatedDivider />
+
+			<AmbassadorSection />
 		</>
 	);
 };

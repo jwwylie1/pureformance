@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Brain, Eye, Zap } from 'lucide-react';
 
 const BenefitsSection = () => {
@@ -15,7 +15,7 @@ const BenefitsSection = () => {
       icon: <Eye size={40} />,
       title: "PURE FOCUS",
       subtitle: "LIONS MANE + TAURINE",
-      description: "Driven by Lion’s Mane and B-Vitamins, Pureformance supports mental clarity, concentration, and healthy brain function. It helps you lock in on the task at hand, no matter the situation. "
+      description: "Driven by Lion's Mane and B-Vitamins, Pureformance supports mental clarity, concentration, and healthy brain function. It helps you lock in on the task at hand, no matter the situation. "
     },
     {
       icon: <Zap size={40} />,
@@ -25,8 +25,51 @@ const BenefitsSection = () => {
     }
   ];
 
+  const [isVisible, setIsVisible] = useState(false);
+  const benefitsRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      {
+        threshold: 0.3, // Trigger when 30% of element is visible
+        rootMargin: '0px 0px -50px 0px' // Trigger slightly before fully visible
+      }
+    );
+
+    if (benefitsRef.current) {
+      observer.observe(benefitsRef.current);
+    }
+
+    return () => {
+      if (benefitsRef.current) {
+        observer.unobserve(benefitsRef.current);
+      }
+    };
+  }, []);
+
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  const handleIconChange = (index) => {
+    if (index !== activeIcon) {
+      // Start fade out animation
+      setIsAnimating(true);
+
+      // After fade out completes, change content and fade back in
+      setTimeout(() => {
+        setActiveIcon(index);
+        setIsAnimating(false);
+      }, 200);
+    }
+  };
+
   return (
-    <div className="benefits-ctr">
+    <div className={`benefits-ctr transition-1s ${isVisible ? '' : 'animate-invisible'
+      }`} ref={benefitsRef}>
       <h1>
         OUR BENEFITS
       </h1>
@@ -35,12 +78,11 @@ const BenefitsSection = () => {
         {benefits.map((benefit, index) => (
           <button
             key={index}
-            onClick={() => setActiveIcon(index)}
-            className={`benefits-icon ${
-              activeIcon === index 
-                ? 'benefits-icon-active' 
-                : 'benefits-icon-inactive'
-            }`}
+            onClick={() => handleIconChange(index)}
+            className={`benefits-icon ${activeIcon === index
+              ? 'benefits-icon-active'
+              : 'benefits-icon-inactive'
+              }`}
           >
             {benefit.icon}
           </button>
@@ -48,18 +90,22 @@ const BenefitsSection = () => {
       </div>
 
       {/* Content section */}
-      <div className="text-center transition-all duration-500">
-        <h2>
-          {benefits[activeIcon].title}
-        </h2>
+      <div className="text-center">
+        <div className={`transition-all duration-200 ease-in-out ${
+            isAnimating ? 'opacity-0 translate-y-1' : 'opacity-100 translate-y-0'
+          }`}>
+          <h2>
+            {benefits[activeIcon].title}
+          </h2>
 
-        <h4>
-          {benefits[activeIcon].subtitle}
-        </h4>
-        
-        <p className="text-gray-800 text-base leading-relaxed max-w-3xl mx-auto">
-          {benefits[activeIcon].description}
-        </p>
+          <h4>
+            {benefits[activeIcon].subtitle}
+          </h4>
+
+          <p className="text-gray-800 text-base leading-relaxed max-w-3xl mx-auto">
+            {benefits[activeIcon].description}
+          </p>
+        </div>
       </div>
     </div>
   );

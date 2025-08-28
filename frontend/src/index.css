@@ -25,6 +25,17 @@ body {
 
 .bg-mint {background-color: #4ab9cf;}
 
+.transition-1s {
+  transition: all;
+  transition-timing-function: ease-out;
+  transition-duration: 1s;
+}
+
+.animate-invisible {
+  padding-top: 200px;
+  opacity: 0;
+}
+
 .navbar-margin {
   margin-top: 100px
 }
@@ -128,7 +139,7 @@ nav {
 
 .surf-picture {
   background-image: url('/imgs/PLACEHOLDERsurf.webp');
-  font-size: 3vw;
+  font-size: 3.3vw;
   padding-left: 7%;
 }
 
@@ -319,6 +330,10 @@ nav {
   margin-bottom: 24px;
   display: flex;
   justify-content: center;
+}
+
+.map-img {
+  width: 70%;
 }
 
 .item-page-ctr {

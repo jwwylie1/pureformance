@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Leaf, Brain, Zap, Eye, Flower, Heart, Coffee, Wind } from 'lucide-react';
+import { motion } from "framer-motion";
+
 
 export default function IngredientsPage() {
   const ingredients = [
@@ -31,7 +33,7 @@ export default function IngredientsPage() {
       name: "GINGER ROOT",
       icon: <Flower size={40} />,
       color: "#f97316", // orange
-      description: "A natural root with anti-inflammatory and digestive benefits. It supports recovery by easing soreness and inflammation while promoting digestive comfort before and after activity."
+      description: "A natural root with anti-inflammatory and digestive ingredients. It supports recovery by easing soreness and inflammation while promoting digestive comfort before and after activity."
     },
     {
       name: "LEMON BALM",
@@ -41,7 +43,7 @@ export default function IngredientsPage() {
     }
   ];
 
-  const benefits = [
+  const theobromineProperties = [
     {
       icon: Wind,
       title: "Supports breathing",
@@ -69,17 +71,23 @@ export default function IngredientsPage() {
     }
   ];
 
+  
+
   return (
     <>
       <div className='big-picture-ctr w-100 surf-picture'>
         OUR UNIQUE FORMULA
       </div>
 
-      <div style={{
+      <motion.div style={{
         minHeight: '100vh',
         backgroundColor: '#f8fafc',
         padding: '60px 20px'
-      }}>
+      }}
+			initial={{ opacity: 0, y: 100 }}
+			animate={{ opacity: 1, y: 0 }}
+			transition={{ duration: 0.8 }}
+      >
         {/* Hero Section */}
         <div style={{
           textAlign: 'center',
@@ -340,7 +348,7 @@ export default function IngredientsPage() {
             </p>
 
             <div className="flex gap-4 mb-6">
-              {benefits.map((benefit, index) => {
+              {theobromineProperties.map((benefit, index) => {
                 const IconComponent = benefit.icon;
                 return (
                   <div key={index} className="flex-1 text-center">
@@ -363,7 +371,7 @@ export default function IngredientsPage() {
             </p>
           </div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 }
