@@ -5,18 +5,18 @@ export default function ValuesSection() {
   const values = [
     {
       icon: <Users size={40} />,
-      title: "AUTHENTIC PERFORMANCE",
-      description: "PLACEHOLDER: Our headquarters are located globally, but our community is universal. Our growing network of like-minded individuals empower each other to keep moving and push through new challenges together. Be a part of our community by joining our ambassador program!"
+      title: "UNIQUE STATE OF MIND",
+      description: "Pureformance is built around a different approach to energy—no caffeine, no sugar, no crash. Instead, we use theobromine and other functional ingredients to provide a smoother, longer-lasting boost that fuels both the body and the mind. Our formula is designed for athletes, students, and professionals who need calm focus and energy when it matters most."
     },
     {
       icon: <Target size={40} />,
-      title: "COMMUNITY DRIVEN GROWTH",
-      description: "PLACEHOLDER: Our fitness enthusiasts are fearless, and each one is dedicated to pushing beyond their personal limits and unlocking their individual capability. They always work hard and strive for excellence in everything they pursue."
+      title: "POWERED BY NATURE",
+      description: "Our ingredients are inspired by nature — adaptogens, plant extracts, and minerals that support performance in natural ways. From Theobromine and Lion's Mane for focus, to Lemon Balm L-theanine for calm and Baja Gold salts for hydration, every element was chosen with purpose."
     },
     {
       icon: <Heart size={40} />,
-      title: "A THIRD VALUE",
-      description: "PLACEHOLDER: We embody a healthy lifestyle and inspire you to live life to the fullest. We help fuel your body so you can stay motivated and push past your goals while maintaining balance in all aspects of wellness."
+      title: "PUREFORMANCE FOR ALL",
+      description: "We believe performance isn't just personal—it's community-driven. Pureformance is more than a drink; it's a movement built by athletes and students for everyone chasing their goals. We're committed to building an inclusive community and giving back—from supporting local athletes to partnering with organizations that make health and performance more accessible."
     }
   ];
 

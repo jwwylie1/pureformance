@@ -9,26 +9,26 @@ const BenefitsSection = () => {
       icon: <Brain size={40} />,
       title: "PURE CALM",
       subtitle: "LEMON BALM + L-THEANINE",
-      description: "PLACEHOLDERA published study conducted by the University of California showed that consuming our energy formula during your pre-workout routine enhances sustained energy levels and reduces fatigue by up to 35% during intense training sessions."
+      description: "Formulated with L-Theanine and Lemon Balm to promote a balanced state of mind. These ingredients help reduce stress and smooth out energy levels, keeping you composed and steady even in high-pressure moments."
     },
     {
       icon: <Eye size={40} />,
       title: "PURE FOCUS",
       subtitle: "LIONS MANE + TAURINE",
-      description: "PLACEHOLDERResearch from Sports Science Institute demonstrates that our proprietary blend increases power output and endurance capacity. Athletes reported 20% improvement in workout intensity and duration when using our formula consistently."
+      description: "Driven by Lion’s Mane and B-Vitamins, Pureformance supports mental clarity, concentration, and healthy brain function. It helps you lock in on the task at hand, no matter the situation. "
     },
     {
       icon: <Zap size={40} />,
       title: "PURE ENERGY",
       subtitle: "THEOBROMINE + B-VITAMINS",
-      description: "PLACEHOLDERClinical trials at the Institute of Exercise Medicine found that our antioxidant-rich formula accelerates muscle recovery by 40% and provides cellular protection against exercise-induced oxidative stress and inflammation."
+      description: "Energized with Theobromine + B-Vitamins. Theobromine is a natural compound found in tropical regions across the world that delivers smoother, longer-lasting energy than caffeine, while also supporting circulation and breathing. Combined with B-Vitamins, it fuels your body with clean, sustained performance — no sugar, no crash."
     }
   ];
 
   return (
     <div className="benefits-ctr">
       <h1>
-        PLACEHOLDER
+        OUR BENEFITS
       </h1>
       {/* Icons section */}
       <div className="flex justify-center items-center gap-8 mb-8">
