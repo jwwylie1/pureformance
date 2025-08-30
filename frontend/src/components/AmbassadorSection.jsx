@@ -45,7 +45,7 @@ export default function AmbassadorSection() {
           margin: '0'
         }}>
           COAST TO COAST,<br />
-          <span style={{ fontWeight: '700' }}>PURE PERFORMANCE</span>
+          <span>PURE PERFORMANCE</span>
         </h1>
       </div>
 

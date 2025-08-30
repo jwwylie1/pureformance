@@ -9,6 +9,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Eurostile';
+  src: url('/fonts/Eurostile.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   background-color: white;
   font-family: Hedvig;
@@ -23,7 +30,9 @@ body {
   color: #4ab9cf;
 }
 
-.bg-mint {background-color: #4ab9cf;}
+.bg-mint {
+  background-color: #4ab9cf;
+}
 
 .transition-1s {
   transition: all;
@@ -134,7 +143,9 @@ nav {
   background-repeat: no-repeat;
   line-height: 25vw;
   color: white;
-  font-weight: 800;
+  font-family: Eurostile;
+  letter-spacing: .1em;
+  font-weight: 900;
 }
 
 .surf-picture {
@@ -244,6 +255,24 @@ nav {
   margin: 50px 0;
 }
 
+.benefits-header {
+  font-size: 64px;
+  font-weight: 900;
+  line-height: 1.1;
+  color: black;
+  margin: 0;
+  background-clip: text;
+  letter-spacing: 0.02em;
+}
+
+.benefits-header span {
+  background: linear-gradient(135deg, #4ab9cf 0%, #3797aa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 900;
+}
+
 .benefits-icon {
   width: 10%;
   display: flex;
@@ -260,12 +289,6 @@ nav {
   color: black;
 }
 
-.benefits-ctr h1 {
-  margin: 0 0 24px 0;
-  text-align: center;
-  font-size: 40px;
-  font-weight: 900;
-}
 
 .benefits-ctr h2 {
   /*title*/
@@ -304,24 +327,42 @@ nav {
   margin-bottom: 8px;
 }
 
+.core-values-header span {
+  background: linear-gradient(135deg, #4ab9cf 0%, #3797aa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 900;
+  font-size: 54px;
+}
+
 .three-col {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 48px;
+  gap: 60px;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
+.three-col > div {
+  display: flex;
+  flex-direction: column;
+}
+
 .three-col h2 {
-  font-size: 20px;
+  font-size: 28px;
   font-weight: 700;
   margin-bottom: 8px;
+  min-height: 70px; /* Force all titles to be the same height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .three-col p {
   color: #4b5563;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.6;
   text-align: center;
 }
@@ -330,6 +371,12 @@ nav {
   margin-bottom: 24px;
   display: flex;
   justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.three-col > div:hover .values-icon {
+  transform: scale(1.2); /* Makes icon 20% bigger on hover */
+  filter: brightness(1.05)
 }
 
 .map-img {
@@ -452,7 +499,9 @@ nav {
   transition: background-color 0.2s
 }
 
-.stock-line {margin-bottom: 32px}
+.stock-line {
+  margin-bottom: 32px
+}
 
 .cart-page-ctr {
   padding: 12px 4%;

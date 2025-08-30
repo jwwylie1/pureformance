@@ -250,8 +250,8 @@ export default function IngredientsPage() {
                 </div>
                 <div>
                   <p style={{
-                    fontSize: '14px',
-                    fontWeight: '600',
+                    fontSize: '20px',
+                    fontWeight: '900',
                     color: '#8b4513',
                     marginBottom: '4px',
                     letterSpacing: '0.1em',
@@ -281,7 +281,6 @@ export default function IngredientsPage() {
                     fontSize: '16px',
                     color: '#6b7280',
                     lineHeight: '1.5',
-                    maxWidth: '280px',
                     marginBottom: '20px'
                   }}>
                     A natural compound found in <b>cacao beans</b> and <b>Yerba mate</b>, long used by athletes for its smooth, sustained energy. Unlike caffeine, theobromine avoids the spikes and crashes.

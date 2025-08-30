@@ -70,9 +70,31 @@ const BenefitsSection = () => {
   return (
     <div className={`benefits-ctr transition-1s ${isVisible ? '' : 'animate-invisible'
       }`} ref={benefitsRef}>
-      <h1>
-        OUR BENEFITS
-      </h1>
+      
+      {/* Updated Header Section */}
+      <div style={{ 
+        textAlign: 'center', 
+        marginBottom: '48px',
+        position: 'relative'
+      }}>
+        <h1 className="benefits-header">
+          PROVEN TO{' '}
+          <span>
+            PERFORM
+          </span>
+        </h1>
+        
+        <p style={{
+          fontSize: '16px',
+          color: '#6b7280',
+          marginTop: '16px',
+          fontWeight: '500',
+          letterSpacing: '0.05em'
+        }}>
+          SCIENTIFICALLY FORMULATED FOR PEAK PERFORMANCE
+        </p>
+      </div>
+
       {/* Icons section */}
       <div className="flex justify-center items-center gap-8 mb-8">
         {benefits.map((benefit, index) => (

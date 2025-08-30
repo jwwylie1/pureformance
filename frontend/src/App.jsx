@@ -9,6 +9,7 @@ import CategoryPage from "./pages/CategoryPage";
 import ItemPage from "./pages/ItemPage";
 import Products from "./pages/ProductsPage";
 import IngredientsPage from "./pages/IngredientsPage";
+import AmbassadorsPage from "./pages/AmbassadorsPage";
 
 import Navbar from "./components/Navbar";
 import { Toaster } from "react-hot-toast";
@@ -60,6 +61,7 @@ function App() {
 						<Route path='/purchase-cancel' element={user ? <PurchaseCancelPage /> : <Navigate to='/login' />} />
 
 						<Route path='/products' element={<Products />} />
+						<Route path='/ambassadors' element={<AmbassadorsPage />} />
 
 						<Route path='/item/:weblink' element={<ItemPage/>} />
 						<Route path='/:category' element={<CategoryPage />} />

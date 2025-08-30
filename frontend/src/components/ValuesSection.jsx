@@ -62,7 +62,7 @@ export default function ValuesSection() {
           margin: '0'
         }}>
           PLACEHOLDER,<br />
-          <span style={{ fontWeight: '700' }}>PLACEHOLDER</span>
+          <span>PLACEHOLDER</span>
         </h1>
       </div>
 
