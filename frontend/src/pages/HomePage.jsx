@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import FeaturedProducts from "../components/FeaturedProducts";
 import BenefitsSection from "../components/BenefitsSection";
 import AnimatedDivider from "../components/AnimatedDivider";
+import ScrollingDivider from "../components/ScrollingDivider";
 import ValuesSection from "../components/ValuesSection";
 import AmbassadorSection from "../components/AmbassadorSection";
 
@@ -48,7 +49,7 @@ const HomePage = () => {
 				</div>
 			</motion.div>
 
-			<AnimatedDivider />
+			<ScrollingDivider />
 
 			<AmbassadorSection />
 		</>

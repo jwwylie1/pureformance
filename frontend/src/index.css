@@ -512,3 +512,10 @@ nav {
   margin: 0 auto;
   flex: none;
 }
+
+.ingredients-can {
+  display: block;         /* removes inline spacing */
+  width: auto;            /* let the browser calculate based on aspect ratio */
+  height: 800px;           /* same here */
+  object-fit: contain;    /* ensures aspect ratio is preserved */
+}

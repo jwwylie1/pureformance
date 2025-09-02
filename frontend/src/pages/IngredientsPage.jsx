@@ -71,6 +71,33 @@ export default function IngredientsPage() {
     }
   ];
 
+  const [isVisible, setIsVisible] = useState(false);
+  const productRef = useRef(null);
+  
+    useEffect(() => {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+          }
+        },
+        {
+          threshold: 0.3,
+          rootMargin: '0px 0px -50px 0px'
+        }
+      );
+  
+      if (productRef.current) {
+        observer.observe(productRef.current);
+      }
+  
+      return () => {
+        if (productRef.current) {
+          observer.unobserve(productRef.current);
+        }
+      };
+    }, []);
+
   
 
   return (
@@ -96,7 +123,7 @@ export default function IngredientsPage() {
           margin: '0 auto 80px auto'
         }}>
           <h2 style={{
-            fontSize: '32px',
+            fontSize: '48px',
             fontWeight: '700',
             color: '#374151',
             marginBottom: '8px'
@@ -104,7 +131,7 @@ export default function IngredientsPage() {
             Built By Athletes, <b>For Athletes</b>
           </h2>
           <h3 style={{
-            fontSize: '24px',
+            fontSize: '34px',
             fontWeight: '600',
             letterSpacing: '0.05em'
           }} className='mint'>
@@ -141,7 +168,7 @@ export default function IngredientsPage() {
           <div style={{
             display: 'grid',
             gridTemplateColumns: '1fr 400px 1fr',
-            gap: '60px',
+            gap: '10px',
             alignItems: 'start',
             position: 'relative',
             zIndex: 2
@@ -150,19 +177,23 @@ export default function IngredientsPage() {
             <div style={{
               display: 'flex',
               flexDirection: 'column',
-              gap: '60px',
-              paddingTop: '100px'
-            }}>
+              gap: '40px',
+              marginTop: '100px',
+
+            }}
+            className={`transition-1s ${
+            isVisible ? '' : 'animate-invisible'
+          }`} ref={productRef}>
               {ingredients.slice(0, 3).map((ingredient, index) => (
                 <div key={ingredient.name} style={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '24px',
+                  gap: '20px',
                   justifyContent: 'flex-end'
                 }}>
                   <div style={{ textAlign: 'right' }}>
                     <h3 style={{
-                      fontSize: '18px',
+                      fontSize: '22px',
                       fontWeight: '800',
                       color: '#1f2937',
                       marginBottom: '8px',
@@ -171,10 +202,9 @@ export default function IngredientsPage() {
                       {ingredient.name}
                     </h3>
                     <p style={{
-                      fontSize: '14px',
+                      fontSize: '16px',
                       color: '#6b7280',
                       lineHeight: '1.5',
-                      maxWidth: '300px'
                     }}>
                       {ingredient.description}
                     </p>
@@ -203,30 +233,78 @@ export default function IngredientsPage() {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              gap: '60px'
+              gap: '10px'
             }}>
               <div style={{
-                width: '350px',
-                height: '500px',
-                backgroundColor: '#e5e7eb',
-                borderRadius: '20px',
+                width: '400px',
+                height: '800px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
                 position: 'relative',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                marginTop: '-50px',
               }}>
-                <div style={{
-                  fontSize: '48px',
-                  color: '#9ca3af',
-                  fontWeight: '700'
-                }}>
-                  ENERGY DRINK
-                </div>
+                <img src="/imgs/ingredients-can.png" 
+                className='ingredients-can' />
               </div>
+            </div>
 
-              {/* Theobromine Below Can */}
+            {/* Right Side Ingredients */}
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '40px',
+              marginTop: '100px'
+            }} className={`transition-1s ${
+            isVisible ? '' : 'animate-invisible'
+          }`} ref={productRef}>
+              {ingredients.slice(3, 6).map((ingredient, index) => (
+                <div key={ingredient.name} style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '20px',
+                  justifyContent: 'flex-start'
+                }}>
+                  <div style={{
+                    width: '80px',
+                    height: '80px',
+                    borderRadius: '50%',
+                    backgroundColor: 'white',
+                    borderWidth: '2px',
+                    borderColor: ingredient.color,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: ingredient.color,
+                    flexShrink: 0
+                  }}>
+                    {ingredient.icon}
+                  </div>
+                  <div>
+                    <h3 style={{
+                      fontSize: '22px',
+                      fontWeight: '800',
+                      color: '#1f2937',
+                      marginBottom: '8px',
+                      letterSpacing: '0.05em'
+                    }}>
+                      {ingredient.name}
+                    </h3>
+                    <p style={{
+                      fontSize: '16px',
+                      color: '#6b7280',
+                      lineHeight: '1.5',
+                    }}>
+                      {ingredient.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+{/* Theobromine Below Can */}
               <div style={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -250,16 +328,15 @@ export default function IngredientsPage() {
                 </div>
                 <div>
                   <p style={{
-                    fontSize: '20px',
+                    fontSize: '26px',
                     fontWeight: '900',
                     color: '#8b4513',
-                    marginBottom: '4px',
                     letterSpacing: '0.1em',
                     textTransform: 'uppercase'
                   }}>
                     Our Difference
                   </p>
-                  <p style={{
+                  {/* <p style={{
                     fontSize: '16px',
                     fontWeight: '600',
                     color: '#6b7280',
@@ -267,80 +344,30 @@ export default function IngredientsPage() {
                     letterSpacing: '0.05em'
                   }}>
                     ALTERNATE ENERGY
-                  </p>
-                  <h3 style={{
-                    fontSize: '22px',
+                  </p> */}
+                  <h1 style={{
+                    fontSize: '66px',
                     fontWeight: '900',
                     color: '#1f2937',
                     marginBottom: '8px',
-                    letterSpacing: '0.05em'
+                    letterSpacing: '0.07em',
+                    WebkitTextStrokeWidth: '2px',
+                    fontFamily: 'Eurostile'
                   }}>
                     THEOBROMINE
-                  </h3>
+                  </h1>
                   <p style={{
-                    fontSize: '16px',
+                    fontSize: '20px',
                     color: '#6b7280',
                     lineHeight: '1.5',
-                    marginBottom: '20px'
+                    marginBottom: '20px',
+                    maxWidth: '600px',
                   }}>
                     A natural compound found in <b>cacao beans</b> and <b>Yerba mate</b>, long used by athletes for its smooth, sustained energy. Unlike caffeine, theobromine avoids the spikes and crashes.
                   </p>
                 </div>
               </div>
-            </div>
 
-            {/* Right Side Ingredients */}
-            <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '60px',
-              paddingTop: '100px'
-            }}>
-              {ingredients.slice(3, 6).map((ingredient, index) => (
-                <div key={ingredient.name} style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '24px',
-                  justifyContent: 'flex-start'
-                }}>
-                  <div style={{
-                    width: '80px',
-                    height: '80px',
-                    borderRadius: '50%',
-                    backgroundColor: 'white',
-                    borderWidth: '2px',
-                    borderColor: ingredient.color,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: ingredient.color,
-                    flexShrink: 0
-                  }}>
-                    {ingredient.icon}
-                  </div>
-                  <div>
-                    <h3 style={{
-                      fontSize: '18px',
-                      fontWeight: '800',
-                      color: '#1f2937',
-                      marginBottom: '8px',
-                      letterSpacing: '0.05em'
-                    }}>
-                      {ingredient.name}
-                    </h3>
-                    <p style={{
-                      fontSize: '14px',
-                      color: '#6b7280',
-                      lineHeight: '1.5',
-                      maxWidth: '300px'
-                    }}>
-                      {ingredient.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
           <div className="w-full text-left">
             <p className="text-xl font-semibold text-gray-800 mb-12 mt-8 text-center">
               What makes theobromine unique for performance:
