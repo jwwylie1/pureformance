@@ -6,7 +6,7 @@ export default function HydrationTextBanner() {
     <div style={{
       width: '100%',
       height: '60px',
-      backgroundColor: 'black',
+      backgroundColor: '#ccc',
       overflow: 'hidden',
       display: 'flex',
       alignItems: 'center',
@@ -17,7 +17,7 @@ export default function HydrationTextBanner() {
         style={{
           display: 'flex',
           alignItems: 'center',
-          animation: 'scrollText 20s linear infinite',
+          animation: 'scrollText 30s linear infinite',
           whiteSpace: 'nowrap'
         }}
       >

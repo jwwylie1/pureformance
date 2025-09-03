@@ -321,10 +321,18 @@ nav {
   margin-bottom: 32px;
 }
 
-.core-values-header p {
+.our-ambassadors {
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 8px;
+}
+
+.our-core-values {
+  font-size: calc(40px + 6vw);
+  font-weight: 600;
+  height: 30px;
+  margin-bottom: 8px;
+  opacity: 0.2;
 }
 
 .core-values-header span {
@@ -368,10 +376,16 @@ nav {
 }
 
 .values-icon {
-  margin-bottom: 24px;
+  margin: 0 auto 34px auto;
   display: flex;
   justify-content: center;
   transition: transform 0.3s ease;
+  background: #ffffffff;
+  z-index: 200;
+  width: fit-content;
+  padding: 16px;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px #4ab9cf;
 }
 
 .three-col > div:hover .values-icon {

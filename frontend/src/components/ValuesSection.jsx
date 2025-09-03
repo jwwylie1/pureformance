@@ -52,10 +52,10 @@ export default function ValuesSection() {
       isVisible ? '' : 'animate-invisible'
     }`} ref={valuesRef}>
       <div className='core-values-header'>
-        <p className='mint'>
+        <p className='our-core-values mint'>
           OUR CORE VALUES
         </p>
-        <h1 style={{ 
+        {/* <h1 style={{ 
           fontSize: '48px',
           fontWeight: '900',
           lineHeight: '1.1',
@@ -63,7 +63,7 @@ export default function ValuesSection() {
         }}>
           PLACEHOLDER,<br />
           <span>PLACEHOLDER</span>
-        </h1>
+        </h1> */}
       </div>
 
       {/* Three column layout */}

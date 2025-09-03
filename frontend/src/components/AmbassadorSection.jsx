@@ -35,7 +35,7 @@ export default function AmbassadorSection() {
     }`} ref={ambassadorRef}>
       
       <div className='core-values-header'>
-        <p className='mint'>
+        <p className='our-ambassadors mint'>
           OUR AMBASSADORS
         </p>
         <h1 style={{ 

@@ -8,37 +8,31 @@ export default function IngredientsPage() {
     {
       name: "BAJA GOLD SALTS",
       icon: <Leaf size={40} />,
-      color: "#10b981", // emerald
       description: "A natural source of electrolytes with over 90 trace minerals, including magnesium, potassium, and calcium. These salts provide superior hydration, nerve support, and muscle performance compared to ordinary processed salts."
     },
     {
       name: "L-THEANINE",
       icon: <Brain size={40} />,
-      color: "#3b82f6", // blue
       description: "An amino acid naturally found in green tea leaves that promotes calm focus. It smooths energy levels, keeping the mind clear and steady without jitters."
     },
     {
       name: "B-VITAMINS",
       icon: <Zap size={40} />,
-      color: "#f59e0b", // amber
       description: "Vitamins that support energy metabolism and healthy nervous system function. They convert carbohydrates, fats, and proteins into usable energy, sustaining performance and speeding recovery after workouts."
     },
     {
       name: "LIONS MANE",
       icon: <Eye size={40} />,
-      color: "#8b5cf6", // violet
       description: "A mushroom extract studied for its effects on memory, focus, and cognitive health. It helps sharpen concentration and maintain mental strength during training and competition."
     },
     {
       name: "GINGER ROOT",
       icon: <Flower size={40} />,
-      color: "#f97316", // orange
       description: "A natural root with anti-inflammatory and digestive ingredients. It supports recovery by easing soreness and inflammation while promoting digestive comfort before and after activity."
     },
     {
       name: "LEMON BALM",
       icon: <Heart size={40} />,
-      color: "#06b6d4", // cyan
       description: "A calming herb from the mint family that helps reduce stress and supports relaxation. It promotes a balanced mindset in high-pressure moments, aiding both recovery and consistent performance."
     }
   ];
@@ -154,7 +148,7 @@ export default function IngredientsPage() {
             zIndex: 1
           }}>
             <h1 style={{
-              fontSize: '120px',
+              fontSize: '140px',
               fontWeight: '900',
               color: 'rgba(229, 231, 235, 0.8)',
               letterSpacing: '0.2em',
@@ -215,11 +209,11 @@ export default function IngredientsPage() {
                     borderRadius: '50%',
                     backgroundColor: 'white',
                     borderWidth: '2px',
-                    borderColor: ingredient.color,
+                    borderColor: '#4ab9cf',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: ingredient.color,
+                    color: '#4ab9cf',
                     flexShrink: 0
                   }}>
                     {ingredient.icon}
@@ -272,11 +266,11 @@ export default function IngredientsPage() {
                     borderRadius: '50%',
                     backgroundColor: 'white',
                     borderWidth: '2px',
-                    borderColor: ingredient.color,
+                    borderColor: '#4ab9cf',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: ingredient.color,
+                    color: '#4ab9cf',
                     flexShrink: 0
                   }}>
                     {ingredient.icon}
@@ -310,27 +304,14 @@ export default function IngredientsPage() {
                 flexDirection: 'column',
                 alignItems: 'center',
                 gap: '16px',
-                textAlign: 'center'
+                textAlign: 'center',
+                marginTop: '50px',
               }}>
-                <div style={{
-                  width: '80px',
-                  height: '80px',
-                  borderRadius: '50%',
-                  backgroundColor: 'white',
-                  borderWidth: '3px',
-                  borderColor: '#8b4513',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#8b4513'
-                }}>
-                  <Coffee size={40} />
-                </div>
                 <div>
                   <p style={{
                     fontSize: '26px',
                     fontWeight: '900',
-                    color: '#8b4513',
+                    color: '#4ab9cf',
                     letterSpacing: '0.1em',
                     textTransform: 'uppercase'
                   }}>
