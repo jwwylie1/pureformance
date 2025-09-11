@@ -28,7 +28,6 @@ const HomePage = () => {
 
 	return (
 		<>
-			{/*}
 			<div className='big-picture-ctr w-100 surf-picture'>
         UNLOCK YOUR <b className="fw-900">PURE</b>FORMANCE
       </div>
@@ -53,37 +52,6 @@ const HomePage = () => {
 			<ScrollingDivider />
 
 			<AmbassadorSection />
-			*/}
-
-			<div className="home-gradient">
-				<div className="home-start-ctr">
-					<img src="/P_big.png" />
-					<div className="state-of-mind">
-						<span className="som-state">STATE</span>
-						<p>
-							<span className="som-of">OF</span>&nbsp;
-							<span className="som-mind">MIND</span>
-						</p>
-					</div>
-				</div>
-
-				<div className="performance-section">
-					<img src="/imgs/3-cans-closer-v.jpg" />
-					<h1>BUILT FOR PERFORMANCE</h1>
-					<h3>ATHLETES, STUDENTS, AND PROFESSIONALS</h3>
-				</div>
-
-				<div className='values-section'>
-					<h1>ALL IN</h1>
-					<h4>IS WHO WE ARE</h4>
-
-					<ValuesSection />
-				</div>
-
-				<AnimatedDivider />
-
-				<BenefitsSection />
-			</div>
 
 		</>
 	);

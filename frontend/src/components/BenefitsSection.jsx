@@ -6,19 +6,19 @@ const BenefitsSection = () => {
 
   const benefits = [
     {
-      icon: <Brain size={40} />,
+      icon: <Brain size={70} />,
       title: "PURE CALM",
       subtitle: "LEMON BALM + L-THEANINE",
       description: "Formulated with L-Theanine and Lemon Balm to promote a balanced state of mind. These ingredients help reduce stress and smooth out energy levels, keeping you composed and steady even in high-pressure moments."
     },
     {
-      icon: <Eye size={40} />,
+      icon: <Eye size={70} />,
       title: "PURE FOCUS",
       subtitle: "LIONS MANE + TAURINE",
       description: "Driven by Lion's Mane and B-Vitamins, Pureformance supports mental clarity, concentration, and healthy brain function. It helps you lock in on the task at hand, no matter the situation. "
     },
     {
-      icon: <Zap size={40} />,
+      icon: <Zap size={70} />,
       title: "PURE ENERGY",
       subtitle: "THEOBROMINE + B-VITAMINS",
       description: "Energized with Theobromine + B-Vitamins. Theobromine is a natural compound found in tropical regions across the world that delivers smoother, longer-lasting energy than caffeine, while also supporting circulation and breathing. Combined with B-Vitamins, it fuels your body with clean, sustained performance — no sugar, no crash."
@@ -70,6 +70,8 @@ const BenefitsSection = () => {
   return (
     <div className={`benefits-ctr transition-1s ${isVisible ? '' : 'animate-invisible'
       }`} ref={benefitsRef}>
+
+      <img src="/imgs/3-cans-ice-far-v.jpg" />
       
       {/* Updated Header Section */}
       <div style={{ 
@@ -78,55 +80,47 @@ const BenefitsSection = () => {
         position: 'relative'
       }}>
         <h1 className="benefits-header">
-          PROVEN TO{' '}
-          <span>
-            PERFORM
-          </span>
+          <span className="ptp-proven">PROVEN</span><br/>
+          <span className="ptp-toper">TO PER</span>
+          <span className="ptp-form">FORM</span>
         </h1>
         
-        <p style={{
-          fontSize: '16px',
-          color: '#6b7280',
-          marginTop: '16px',
-          fontWeight: '500',
-          letterSpacing: '0.05em'
-        }}>
-          SCIENTIFICALLY FORMULATED FOR PEAK PERFORMANCE
-        </p>
       </div>
 
-      {/* Icons section */}
-      <div className="flex justify-center items-center gap-8 mb-8">
-        {benefits.map((benefit, index) => (
-          <button
-            key={index}
-            onClick={() => handleIconChange(index)}
-            className={`benefits-icon ${activeIcon === index
-              ? 'benefits-icon-active'
-              : 'benefits-icon-inactive'
-              }`}
-          >
-            {benefit.icon}
-          </button>
-        ))}
-      </div>
+      <div className="benefits-info-ctr">
+        {/* Icons section */}
+        <div className="flex justify-center items-center gap-8 mb-8">
+          {benefits.map((benefit, index) => (
+            <button
+              key={index}
+              onClick={() => handleIconChange(index)}
+              className={`benefits-icon ${activeIcon === index
+                ? 'benefits-icon-active'
+                : 'benefits-icon-inactive'
+                }`}
+            >
+              {benefit.icon}
+            </button>
+          ))}
+        </div>
 
-      {/* Content section */}
-      <div className="text-center">
-        <div className={`transition-all duration-200 ease-in-out ${
-            isAnimating ? 'opacity-0 translate-y-1' : 'opacity-100 translate-y-0'
-          }`}>
-          <h2>
-            {benefits[activeIcon].title}
-          </h2>
+        {/* Content section */}
+        <div className="text-center">
+          <div className={`transition-all duration-200 ease-in-out ${
+              isAnimating ? 'opacity-0 translate-y-1' : 'opacity-100 translate-y-0'
+            }`}>
+            <h2>
+              {benefits[activeIcon].title}
+            </h2>
 
-          <h4>
-            {benefits[activeIcon].subtitle}
-          </h4>
+            <h4>
+              {benefits[activeIcon].subtitle}
+            </h4>
 
-          <p className="text-gray-800 text-base leading-relaxed max-w-3xl mx-auto">
-            {benefits[activeIcon].description}
-          </p>
+            <p className="text-gray-800 text-base leading-relaxed max-w-3xl mx-auto">
+              {benefits[activeIcon].description}
+            </p>
+          </div>
         </div>
       </div>
     </div>

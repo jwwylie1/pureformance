@@ -11,6 +11,7 @@ import Products from "./pages/ProductsPage";
 import IngredientsPage from "./pages/IngredientsPage";
 import AmbassadorsPage from "./pages/AmbassadorsPage";
 import ContactPage from "./pages/ContactPage";
+import OldHome from "./pages/OldHome";
 
 import Navbar from "./components/Navbar";
 import { Toaster } from "react-hot-toast";
@@ -44,6 +45,7 @@ function App() {
 				<Navbar />
 				<div className='navbar-margin'>
 					<Routes>
+						<Route path='/oldHome' element={<OldHome />} /> {/* DELETE THIS PLACEHOLDER */}
 						<Route path='/' element={<HomePage />} />
 						<Route path='/ingredients' element={<IngredientsPage />} />
 						<Route path='/signup' element={!user ? <SignUpPage /> : <Navigate to='/' />} />

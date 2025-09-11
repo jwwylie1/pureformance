@@ -52,7 +52,7 @@ export default function ValuesSection() {
       isVisible ? '' : 'animate-invisible'
     }`} ref={valuesRef}>
       <div className='core-values-header'>
-        <p className='our-core-values mint'>
+        <p className='our-core-values'>
           OUR CORE VALUES
         </p>
         {/* <h1 style={{ 
