@@ -89,7 +89,7 @@ const BenefitsSection = () => {
 
       <div className="benefits-info-ctr">
         {/* Icons section */}
-        <div className="flex justify-center items-center gap-8 mb-8">
+        <div className="benefits-icons-row">
           {benefits.map((benefit, index) => (
             <button
               key={index}

@@ -6,12 +6,11 @@ export default function HydrationTextBanner() {
     <div style={{
       width: '100%',
       height: '60px',
-      backgroundColor: '#ccc',
+      backgroundColor: '#fff',
       overflow: 'hidden',
       display: 'flex',
       alignItems: 'center',
       position: 'relative',
-      margin: '100px 0',
     }}>
       <div 
         style={{
@@ -26,7 +25,7 @@ export default function HydrationTextBanner() {
           <span
             key={`first-${i}`}
             style={{
-              color: 'white',
+              color: 'black',
               fontSize: '18px',
               fontWeight: '900',
               letterSpacing: '0.1em',

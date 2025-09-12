@@ -55,6 +55,11 @@ const HomePage = () => {
 			<AmbassadorSection />
 			*/}
 
+			<div className='big-picture-ctr w-100 powerade-picture'>
+      </div>
+
+			<ScrollingDivider />
+
 			<div className="home-gradient">
 				<div className="home-start-ctr">
 					<img src="/P_big.png" />
