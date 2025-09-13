@@ -69,6 +69,7 @@ const HomePage = () => {
 							<span className="som-of">OF</span>&nbsp;
 							<span className="som-mind">MIND</span>
 						</p>
+						{/* <span className="som-tm">TM</span> */}
 					</div>
 				</div>
 

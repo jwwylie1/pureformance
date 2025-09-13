@@ -132,11 +132,11 @@ nav {
 
 .home-start-ctr {
   display: grid;
-  grid-template-columns: 1.5fr 1fr;
+  grid-template-columns: 1.2fr 1fr;
 }
 
 .home-start-ctr img {
-  width: 90%;
+  width: 100%;
   margin-left: -20%;
   margin-top: 0px;
   margin-bottom: -120px;
@@ -151,13 +151,15 @@ nav {
   z-index: 10;
 }
 
-.som-state {font-size: 11vw;}
+.som-state {font-size: 13vw;}
 
 .state-of-mind p {display: flex; align-items: center;}
 
 .som-of {font-size: 4.8vw; color: #333;}
 
-.som-mind {font-size: 9.075vw;}
+.som-mind {font-size: 9vw;}
+
+.som-tm {}
 
 .performance-section {
   margin-left: 10%;
