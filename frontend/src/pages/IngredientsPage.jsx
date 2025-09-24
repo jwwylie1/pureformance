@@ -67,50 +67,50 @@ export default function IngredientsPage() {
 
   const [isVisible, setIsVisible] = useState(false);
   const productRef = useRef(null);
-  
-    useEffect(() => {
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-          }
-        },
-        {
-          threshold: 0.3,
-          rootMargin: '0px 0px -50px 0px'
-        }
-      );
-  
-      if (productRef.current) {
-        observer.observe(productRef.current);
-      }
-  
-      return () => {
-        if (productRef.current) {
-          observer.unobserve(productRef.current);
-        }
-      };
-    }, []);
 
-  
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      {
+        threshold: 0.3,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    );
+
+    if (productRef.current) {
+      observer.observe(productRef.current);
+    }
+
+    return () => {
+      if (productRef.current) {
+        observer.unobserve(productRef.current);
+      }
+    };
+  }, []);
+
+
 
   return (
     <>
-      <div className='big-picture-ctr w-100 surf-picture'>
+      {/* <div className='big-picture-ctr w-100 surf-picture'>
         OUR UNIQUE FORMULA
-      </div>
+      </div> */}
 
       <motion.div style={{
         minHeight: '100vh',
         backgroundColor: '#f8fafc',
         padding: '60px 20px'
       }}
-			initial={{ opacity: 0, y: 100 }}
-			animate={{ opacity: 1, y: 0 }}
-			transition={{ duration: 0.8 }}
+        initial={{ opacity: 0, y: 100 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
       >
         {/* Hero Section */}
-        <div style={{
+        {/* <div style={{
           textAlign: 'center',
           marginBottom: '80px',
           maxWidth: '800px',
@@ -131,18 +131,68 @@ export default function IngredientsPage() {
           }} className='mint'>
             Unlock Your Pureformance
           </h3>
-        </div>
+        </div> */}
 
         {/* Main Content Container */}
         <div style={{
-          maxWidth: '1400px',
           margin: '0 auto',
           position: 'relative'
-        }}>
+        }} className="ingredients-page-ctr">
+
+{/* Theobromine Below Can */}
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '16px',
+            textAlign: 'center',
+          }}>
+            <div>
+              <p className="our-difference">
+                OUR DIFFERENCE
+              </p>
+              <p className="od-theobromine">
+                THEOBROMINE
+              </p>
+              <div className="theobromine-desc">
+                <img src="/imgs/sugarfree.jpg" style={{justifySelf: 'right'}} />
+                <p>
+                  A natural compound found in <b>cacao beans</b> and <b>Yerba mate</b>, long used by athletes for its smooth, sustained energy. Unlike caffeine, theobromine avoids the spikes and crashes.
+                </p>
+                <img src="/imgs/caffienefree.jpg" style={{justifySelf: 'left'}} />
+              </div>
+            </div>
+          </div>
+
+          <div className="w-full text-left">
+            <h2 className="text-center">
+              What makes theobromine unique for performance:
+            </h2>
+
+            <div className="flex gap-4 mb-36">
+              {theobromineProperties.map((benefit, index) => {
+                const IconComponent = benefit.icon;
+                return (
+                  <div key={index} className="flex-1 text-center">
+                    <div className="mb-3">
+                      <IconComponent className="w-8 h-8 text-gray-700 mx-auto" />
+                    </div>
+                    <h3 className="font-bold text-gray-800 mb-2 text-md">
+                      {benefit.title}
+                    </h3>
+                    <p className="text-gray-600 text-sm leading-relaxed">
+                      {benefit.description}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
           {/* INGREDIENTS Header */}
           <div style={{
             position: 'absolute',
-            top: '-40px',
+            top: '800px',
             left: '50%',
             transform: 'translateX(-50%)',
             zIndex: 1
@@ -175,9 +225,8 @@ export default function IngredientsPage() {
               marginTop: '100px',
 
             }}
-            className={`transition-1s ${
-            isVisible ? '' : 'animate-invisible'
-          }`} ref={productRef}>
+              className={`transition-1s ${isVisible ? '' : 'animate-invisible'
+                }`} ref={productRef}>
               {ingredients.slice(0, 3).map((ingredient, index) => (
                 <div key={ingredient.name} style={{
                   display: 'flex',
@@ -239,8 +288,8 @@ export default function IngredientsPage() {
                 overflow: 'hidden',
                 marginTop: '-50px',
               }}>
-                <img src="/imgs/ingredients-can.png" 
-                className='ingredients-can' />
+                <img src="/imgs/ingredients-can.png"
+                  className='ingredients-can' />
               </div>
             </div>
 
@@ -250,9 +299,8 @@ export default function IngredientsPage() {
               flexDirection: 'column',
               gap: '40px',
               marginTop: '100px'
-            }} className={`transition-1s ${
-            isVisible ? '' : 'animate-invisible'
-          }`} ref={productRef}>
+            }} className={`transition-1s ${isVisible ? '' : 'animate-invisible'
+              }`} ref={productRef}>
               {ingredients.slice(3, 6).map((ingredient, index) => (
                 <div key={ingredient.name} style={{
                   display: 'flex',
@@ -296,86 +344,6 @@ export default function IngredientsPage() {
                 </div>
               ))}
             </div>
-          </div>
-
-{/* Theobromine Below Can */}
-              <div style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                gap: '16px',
-                textAlign: 'center',
-                marginTop: '50px',
-              }}>
-                <div>
-                  <p style={{
-                    fontSize: '26px',
-                    fontWeight: '900',
-                    color: '#4ab9cf',
-                    letterSpacing: '0.1em',
-                    textTransform: 'uppercase'
-                  }}>
-                    Our Difference
-                  </p>
-                  {/* <p style={{
-                    fontSize: '16px',
-                    fontWeight: '600',
-                    color: '#6b7280',
-                    marginBottom: '4px',
-                    letterSpacing: '0.05em'
-                  }}>
-                    ALTERNATE ENERGY
-                  </p> */}
-                  <h1 style={{
-                    fontSize: '66px',
-                    fontWeight: '900',
-                    color: '#1f2937',
-                    marginBottom: '8px',
-                    letterSpacing: '0.07em',
-                    WebkitTextStrokeWidth: '2px',
-                    fontFamily: 'Eurostile'
-                  }}>
-                    THEOBROMINE
-                  </h1>
-                  <p style={{
-                    fontSize: '20px',
-                    color: '#6b7280',
-                    lineHeight: '1.5',
-                    marginBottom: '20px',
-                    maxWidth: '600px',
-                  }}>
-                    A natural compound found in <b>cacao beans</b> and <b>Yerba mate</b>, long used by athletes for its smooth, sustained energy. Unlike caffeine, theobromine avoids the spikes and crashes.
-                  </p>
-                </div>
-              </div>
-
-          <div className="w-full text-left">
-            <p className="text-xl font-semibold text-gray-800 mb-12 mt-8 text-center">
-              What makes theobromine unique for performance:
-            </p>
-
-            <div className="flex gap-4 mb-6">
-              {theobromineProperties.map((benefit, index) => {
-                const IconComponent = benefit.icon;
-                return (
-                  <div key={index} className="flex-1 text-center">
-                    <div className="mb-3">
-                      <IconComponent className="w-8 h-8 text-gray-700 mx-auto" />
-                    </div>
-                    <h3 className="font-bold text-gray-800 mb-2 text-md">
-                      {benefit.title}
-                    </h3>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      {benefit.description}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
-
-            <p className="text-md text-gray-600 mt-10 leading-relaxed italic text-center">
-              Theobromine is what sets Pureformance apart — a smoother, more sustainable form of energy designed for athletes who need to perform at their peak without the crash.
-            </p>
           </div>
         </div>
       </motion.div>

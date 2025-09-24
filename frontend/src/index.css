@@ -120,14 +120,12 @@ nav {
 }
 
 .home-gradient {
-  background: radial-gradient(
-    circle at top right,
-    #77d7eb 0%,
-    rgba(119, 215, 235, 0.5) 15%,
-    rgba(119, 215, 235, 0.3) 35%,
-    rgba(119, 215, 235, 0.1) 50%,
-    rgba(119, 215, 235, 0) 70%
-  );
+  background: radial-gradient(circle at top right,
+      #77d7eb 0%,
+      rgba(119, 215, 235, 0.5) 15%,
+      rgba(119, 215, 235, 0.3) 35%,
+      rgba(119, 215, 235, 0.1) 50%,
+      rgba(119, 215, 235, 0) 70%);
 }
 
 .home-start-ctr {
@@ -151,13 +149,23 @@ nav {
   z-index: 10;
 }
 
-.som-state {font-size: 13vw;}
+.som-state {
+  font-size: 13vw;
+}
 
-.state-of-mind p {display: flex; align-items: center;}
+.state-of-mind p {
+  display: flex;
+  align-items: center;
+}
 
-.som-of {font-size: 4.8vw; color: #333;}
+.som-of {
+  font-size: 4.8vw;
+  color: #333;
+}
 
-.som-mind {font-size: 9vw;}
+.som-mind {
+  font-size: 9vw;
+}
 
 .som-tm {}
 
@@ -165,17 +173,23 @@ nav {
   margin-left: 10%;
   z-index: 5;
 }
+
 .performance-section h1 {
-  font-size: 5.5vw; 
+  font-size: 5.5vw;
   color: black;
   -webkit-text-stroke: 2px black;
   font-weight: 900;
-  z-index: 100; 
-  position: relative; 
+  z-index: 100;
+  position: relative;
   z-index: 1;
   margin-bottom: -24px;
 }
-.performance-section h3 {font-size: 2.5vw; font-weight: 600; letter-spacing: -1px;}
+
+.performance-section h3 {
+  font-size: 2.5vw;
+  font-weight: 600;
+  letter-spacing: -1px;
+}
 
 .performance-section img {
   position: absolute;
@@ -367,12 +381,26 @@ nav {
   text-align: left;
 }
 
-.ptp-proven {color: #4ab9cf; margin-left: 60px;}
-.ptp-toper {color: #000; margin-left: 120px;}
-.ptp-form {color: #00000000; -webkit-text-stroke: 2px #000;}
+.ptp-proven {
+  color: #4ab9cf;
+  margin-left: 60px;
+}
+
+.ptp-toper {
+  color: #000;
+  margin-left: 120px;
+}
+
+.ptp-form {
+  color: #00000000;
+  -webkit-text-stroke: 2px #000;
+}
 
 .benefits-info-ctr {
   width: 60%;
+  height: 30vw;
+  text-align: center;
+  display: grid;
 }
 
 .benefits-icons-row {
@@ -465,16 +493,17 @@ nav {
   padding: 0 20px;
 }
 
-.three-col > div {
+.three-col>div {
   display: flex;
   flex-direction: column;
 }
 
 .three-col h2 {
-  font-size: 28px;
+  font-size: min(1.8vw, 28px);
   font-weight: 700;
   margin-bottom: 8px;
-  min-height: 70px; /* Force all titles to be the same height */
+  min-height: 70px;
+  /* Force all titles to be the same height */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -500,8 +529,9 @@ nav {
   box-shadow: 0 2px 8px #4ab9cf;
 }
 
-.three-col > div:hover .values-icon {
-  transform: scale(1.2); /* Makes icon 20% bigger on hover */
+.three-col>div:hover .values-icon {
+  transform: scale(1.2);
+  /* Makes icon 20% bigger on hover */
   filter: brightness(1.05)
 }
 
@@ -640,8 +670,52 @@ nav {
 }
 
 .ingredients-can {
-  display: block;         /* removes inline spacing */
-  width: auto;            /* let the browser calculate based on aspect ratio */
-  height: 800px;           /* same here */
-  object-fit: contain;    /* ensures aspect ratio is preserved */
+  display: block;
+  /* removes inline spacing */
+  width: auto;
+  /* let the browser calculate based on aspect ratio */
+  height: 800px;
+  /* same here */
+  object-fit: contain;
+  /* ensures aspect ratio is preserved */
 }
+
+.ingredients-page-ctr h2 {
+  font-size: 36px;
+  font-weight: 600;
+  margin: 40px 0;
+  font-family: 'Eurostile';
+}
+
+.our-difference {
+  position: relative;
+  font-size: calc(40px + 6vw);
+  height: 30px;
+  margin-bottom: 3vw;
+  color: #00000000;
+  -webkit-text-stroke: 2px #4ab9cf;
+  z-index: 10;
+}
+
+.od-theobromine {
+  position: relative;
+  font-size: calc(40px + 6vw);
+  height: 30px;
+  font-weight: 900;
+  margin-bottom: 150px;
+  color: black;
+  z-index: 10;
+}
+
+.theobromine-desc {
+  font-size: 26px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  margin: auto;
+  display: grid;
+  width: 70vw;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 20px;
+}
+
+.theobromine-desc img {height: 90%;}
