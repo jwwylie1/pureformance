@@ -718,4 +718,35 @@ nav {
   gap: 20px;
 }
 
-.theobromine-desc img {height: 90%;}
+.theobromine-desc img {height: 90%; }
+
+.about-main {
+  width: 70vw;
+  margin: 70px auto;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 50px;
+  height: 100%;
+  font-size: 22px;
+  color: #374151;
+  align-items: center;
+}
+
+.surfing-ctr {
+  position: relative ;
+  width: 100%;
+  height: 70vh;
+  overflow: hidden;
+}
+
+.video-mask {
+  position: absolute;
+  inset: 0px;
+  background: linear-gradient(
+  to bottom,
+  rgba(255, 255, 255, 0.5) 0%,
+  rgba(255, 255, 255, 0.5) 90%,
+  rgba(255, 255, 255, 1) 100%
+);
+}

@@ -26,6 +26,35 @@ const HomePage = () => {
 		fetchFeaturedProducts();
 	}, [fetchFeaturedProducts]);
 
+	const messages = [
+		"UNIQUELY FORMULATED",
+		"ALTERNATE ENERGY",
+		"CAFFIENE & SUGAR FREE",
+		"NO SPIKE NO CRASH",
+		"NATURALLY BASED"
+	];
+
+	const Hexagon = ({ message }) => {
+    return (
+      <div className="relative w-28 h-24 mx-2 mt-12 ml-6">
+        <svg 
+          viewBox="0 0 120 104" 
+          className="w-full h-full absolute inset-0 hover:scale-110"
+        >
+          <polygon
+            points="30,0 90,0 120,52 90,104 30,104 0,52"
+            fill="transparent"
+            stroke="black"
+            strokeWidth="3"
+          />
+        </svg>
+        <div className="w-full h-full flex items-center justify-center text-black font-bold text-xs text-center px-2 leading-tight relative z-10">
+          {message}
+        </div>
+      </div>
+    );
+  };
+
 	return (
 		<>
 			{/*}
@@ -56,7 +85,7 @@ const HomePage = () => {
 			*/}
 
 			<div className='big-picture-ctr w-100 powerade-picture'>
-      </div>
+			</div>
 
 			<ScrollingDivider />
 
@@ -76,7 +105,12 @@ const HomePage = () => {
 				<div className="performance-section">
 					<img src="/imgs/3-cans-closer-v.jpg" />
 					<h1>BUILT FOR PERFORMANCE</h1>
-					<h3>ATHLETES, STUDENTS, AND PROFESSIONALS</h3>
+					<h3>NOT YOUR ORDINARY SPORTS DRINK</h3>
+					<div className="flex items-center">
+						{messages.map((message, index) => (
+							<Hexagon key={index} message={message} />
+						))}
+					</div>
 				</div>
 
 				<div className='values-section'>

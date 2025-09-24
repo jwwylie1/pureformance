@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import AnimatedDivider from "../components/AnimatedDivider";
 import AmbassadorBanner from "../components/AmbassadorBanner"
 import ScrollingLogoBanner from "../components/ScrollingLogoBanner";
+import ScrollingDivider from "../components/ScrollingDivider";
+import { Scroll } from "lucide-react";
 
 const categories = [
 	{ href: "/jeans", name: "Jeans", imageUrl: "/jeans.jpg" },
@@ -18,11 +20,52 @@ const AmbassadorsPage = () => {
 
 	return (
 		<>
-			<div className='big-picture-ctr w-100 surf-picture'>
-        OUR AMBASSADORS
+			<div className="surfing-ctr">
+      {/* Video Background */}
+      <video
+        className="absolute inset-0 w-full h-full object-cover"
+        autoPlay
+        muted
+        loop
+        playsInline
+      >
+        <source src="/imgs/surf-ambassador.mp4" type="video/mp4" />
+        {/* Fallback for browsers that don't support the video format */}
+        Your browser does not support the video tag.
+      </video>
+      
+      {/* Overlay for better text readability */}
+      <div className="video-mask"></div>
+      
+      {/* Content */}
+      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-8">
+        {/* Main Heading */}
+        <div className="mb-8">
+          <h1 className="text-7xl md:text-8xl font-black text-black mb-2 leading-tight">
+            BRAND
+          </h1>
+          <h1 className="text-7xl md:text-8xl font-black text-black leading-tight"
+              style={{
+                WebkitTextStroke: '2px black',
+                WebkitTextFillColor: 'transparent'
+              }}>
+            PARTNERSHIPS
+          </h1>
+        </div>
+        
+        {/* Subtitle */}
+        <p className="text-lg md:text-xl text-black font-medium mb-12 max-w-2xl">
+          Join our growing community of high level athletes striving for peak performance
+        </p>
+        
+        {/* CTA Button */}
+        <button className="bg-white text-black font-bold text-lg px-12 py-4 rounded-full hover:bg-gray-100 transition-colors duration-300 shadow-lg">
+          BECOME AN AMBASSADOR
+        </button>
       </div>
+    </div>
 
-			<AnimatedDivider />
+			<ScrollingDivider />
 
       <AmbassadorBanner />
 
