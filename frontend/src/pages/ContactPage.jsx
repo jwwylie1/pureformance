@@ -63,7 +63,9 @@ export default function ContactPage() {
           <br/><br/>
           Our mission is simple: to create energy that feels as good as it performs, and to build a community 
           that stands for more than just a drink. Giving athletes, students, and professionals a new way 
-          to power their performance — one built on calm, focused energy.
+          to power their performance—one built on calm, focused energy.
+          <br/><br/>
+           Proudly Created at Michigan State University and tested through MSU's product centers. Pureformance is the result of passion, persistence, and the pursuit of something better.
         </p>
         <img src="/imgs/about-hat.png" />
       </div>

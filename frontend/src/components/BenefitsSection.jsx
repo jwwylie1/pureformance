@@ -71,22 +71,6 @@ const BenefitsSection = () => {
     <div className={`benefits-ctr transition-1s ${isVisible ? '' : 'animate-invisible'
       }`} ref={benefitsRef}>
 
-      <img src="/imgs/3-cans-ice-far-v.jpg" />
-      
-      {/* Updated Header Section */}
-      <div style={{ 
-        textAlign: 'center', 
-        marginBottom: '48px',
-        position: 'relative'
-      }}>
-        <h1 className="benefits-header">
-          <span className="ptp-proven">PROVEN</span><br/>
-          <span className="ptp-toper">TO PER</span>
-          <span className="ptp-form">FORM</span>
-        </h1>
-        
-      </div>
-
       <div className="benefits-info-ctr">
         {/* Icons section */}
         <div className="benefits-icons-row">
@@ -113,9 +97,9 @@ const BenefitsSection = () => {
               {benefits[activeIcon].title}
             </h2>
 
-            <h4>
+            <h5>
               {benefits[activeIcon].subtitle}
-            </h4>
+            </h5>
 
             <p className="text-gray-800 text-base leading-relaxed max-w-3xl mx-auto">
               {benefits[activeIcon].description}

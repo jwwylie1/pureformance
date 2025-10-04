@@ -55,7 +55,7 @@ const AmbassadorsPage = () => {
         
         {/* Subtitle */}
         <p className="text-lg md:text-xl text-black font-medium mb-12 max-w-2xl">
-          Join our growing community of high level athletes striving for peak performance
+          Join the community of high level athletes, students, and professionals striving for peak performance
         </p>
         
         {/* CTA Button */}
@@ -90,6 +90,10 @@ const AmbassadorsPage = () => {
       </div>
 
       <ScrollingLogoBanner />
+
+      <button class="become-ambassador-btn">
+        Become an Ambassador
+      </button>
 		</>
 	);
 };

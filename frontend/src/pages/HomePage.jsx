@@ -8,6 +8,7 @@ import AnimatedDivider from "../components/AnimatedDivider";
 import ScrollingDivider from "../components/ScrollingDivider";
 import ValuesSection from "../components/ValuesSection";
 import AmbassadorSection from "../components/AmbassadorSection";
+import { MoveRight } from "lucide-react";
 
 const categories = [
 	{ href: "/jeans", name: "Jeans", imageUrl: "/jeans.jpg" },
@@ -36,21 +37,8 @@ const HomePage = () => {
 
 	const Hexagon = ({ message }) => {
     return (
-      <div className="relative w-28 h-24 mx-2 mt-12 ml-6">
-        <svg 
-          viewBox="0 0 120 104" 
-          className="w-full h-full absolute inset-0 hover:scale-110"
-        >
-          <polygon
-            points="30,0 90,0 120,52 90,104 30,104 0,52"
-            fill="transparent"
-            stroke="black"
-            strokeWidth="3"
-          />
-        </svg>
-        <div className="w-full h-full flex items-center justify-center text-black font-bold text-xs text-center px-2 leading-tight relative z-10">
+      <div className="octogon">
           {message}
-        </div>
       </div>
     );
   };
@@ -111,18 +99,24 @@ const HomePage = () => {
 							<Hexagon key={index} message={message} />
 						))}
 					</div>
+					<a href="/ingredients">
+						<button class="to-ingredients-btn">
+							Ingredients &#8594;
+						</button>
+					</a>
 				</div>
 
-				<div className='values-section'>
+				<div className='benefits-section'>
+					<img src="/imgs/3-cans-ice-far-v.jpg" />
 					<h1>ALL IN</h1>
 					<h4>IS WHO WE ARE</h4>
 
-					<ValuesSection />
+					<BenefitsSection />
 				</div>
 
 				<AnimatedDivider />
 
-				<BenefitsSection />
+				<ValuesSection />
 			</div>
 
 		</>

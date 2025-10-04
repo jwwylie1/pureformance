@@ -3,15 +3,7 @@ import React from 'react';
 
 export default function HydrationTextBanner() {
   return (
-    <div style={{
-      width: '100%',
-      height: '60px',
-      backgroundColor: '#fff',
-      overflow: 'hidden',
-      display: 'flex',
-      alignItems: 'center',
-      position: 'relative',
-    }}>
+    <div className="scrolling-banner">
       <div 
         style={{
           display: 'flex',
@@ -25,10 +17,6 @@ export default function HydrationTextBanner() {
           <span
             key={`first-${i}`}
             style={{
-              color: 'black',
-              fontSize: '18px',
-              fontWeight: '900',
-              letterSpacing: '0.1em',
               marginRight: '80px',
               flexShrink: 0
             }}
@@ -43,9 +31,6 @@ export default function HydrationTextBanner() {
             key={`second-${i}`}
             style={{
               color: 'white',
-              fontSize: '18px',
-              fontWeight: '900',
-              letterSpacing: '0.1em',
               marginRight: '80px',
               flexShrink: 0
             }}

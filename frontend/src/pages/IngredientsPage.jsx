@@ -41,7 +41,7 @@ export default function IngredientsPage() {
     {
       icon: Wind,
       title: "Supports breathing",
-      description: "It relaxes airway muscles, promoting easier airflow and improved oxygen delivery — critical for endurance and athletic output."
+      description: "Relaxes airway muscles, promoting easier airflow and improved oxygen delivery"
     },
     {
       icon: Zap,
@@ -102,7 +102,6 @@ export default function IngredientsPage() {
 
       <motion.div style={{
         minHeight: '100vh',
-        backgroundColor: '#f8fafc',
         padding: '60px 20px'
       }}
         initial={{ opacity: 0, y: 100 }}
@@ -173,11 +172,11 @@ export default function IngredientsPage() {
               {theobromineProperties.map((benefit, index) => {
                 const IconComponent = benefit.icon;
                 return (
-                  <div key={index} className="flex-1 text-center">
+                  <div key={index} className="theobromine-benefit-ctr">
                     <div className="mb-3">
-                      <IconComponent className="w-8 h-8 text-gray-700 mx-auto" />
+                      <IconComponent className="w-8 h-8 mx-auto" />
                     </div>
-                    <h3 className="font-bold text-gray-800 mb-2 text-md">
+                    <h3 className="font-bold mb-2 text-md">
                       {benefit.title}
                     </h3>
                     <p className="text-gray-600 text-sm leading-relaxed">
